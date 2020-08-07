@@ -6,7 +6,7 @@ There are multiple tools availbale for the prediction of functional profiles lik
 
 ### MicFunPred workflow
 MicFunPred relies on ~32,000 genome sequences downloaded from Integrated Microbial Genome database (IMG) representing human, plants, mammals, aquatic and terrestrial ecosystem. 16S rRNA database was constructed using sequences from these genomes and available databases oclustered at 97% identity. MicFunPred is able to predict functional profiles in terms of KEGG Orthology (KO), Enzyme Commission (EC), PFam, TIGRFAM and Cluster of Genes (COG).
-![MicFunPred Workflow](images/workflow.jpeg)
+![MicFunPred Workflow](workflow.jpeg)
 
 MicFunPred is database/approach independent hence, 16S sequence data processed using QIIME1/2 or DADA2 with any database can be used. MicFunPred follows multiple steps to predict functional profiles:
 

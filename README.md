@@ -1,4 +1,4 @@
-[<img src="logo.jpeg" width=1000 height=125>](http://210.212.161.138/MicFunPred/)
+[<img src="logo.jpeg" width=1000 height=175>](http://210.212.161.138/MicFunPred/)
 # MicFunPred:
 ## A conserved approach to predict functional profiles from 16S sequence data
 

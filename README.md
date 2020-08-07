@@ -102,7 +102,6 @@ The output directory will have following files:
 │   ├── summarized_by_C.txt
 │   └── summarized_by_Pathway_Module.txt
 ├── MetaCyc_metagenome
-│   ├── EC_metagenome.txt
 │   ├── minPath_files
 │   │   ├── sample1_minpath_in.txt
 │   │   ├── sample1_minpath.out
@@ -113,14 +112,18 @@ The output directory will have following files:
 │   │   ├── sample3_minpath_in.txt
 │   │   ├── sample3_minpath.out
 │   │   └── sample3_minpath.out.details
+│   ├── EC_metagenome.txt
 │   ├── PathwayAbundance.table
 │   ├── PathwayAbundance_with_names.table
 │   ├── Pathway_summarize_by_Types.table
 │   └── RXN_metagenome.txt
-├── out.blast
 ├── Pfam_metagenome
 │   ├── Pfam_metagenome.txt
 │   └── Pfam_metagenome_with_description.txt
+├── TIGRFAM_metagenome
+│   ├── TIGRFAM_metagenome.txt
+│   └── TIGRFAM_metagenome_with_description.txt
+├── out.blast
 ├── predicted_16S_copy_numbers.txt
 ├── predicted_COG.txt
 ├── predicted_EC.txt
@@ -128,8 +131,6 @@ The output directory will have following files:
 ├── predicted_Pfam.txt
 ├── predicted_TIGRFAM.txt
 ├── tax_abund_normalized.table
-├── tax_abund.table
-└── TIGRFAM_metagenome
-    ├── TIGRFAM_metagenome.txt
-    └── TIGRFAM_metagenome_with_description.txt
+└── tax_abund.table
+
 ```

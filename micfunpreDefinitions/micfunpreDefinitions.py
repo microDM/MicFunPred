@@ -55,27 +55,10 @@ def selectBlastHits_assignGenus_subsetOtuTable(blastOut,otuTable,blastcutoff,lev
         exit('None of OTU/ASV sequences passed the given percent identity cut-off')
     otuId_tax_dict = dict(zip(df.index,df[1].str.split("_",expand=True)[1]))
     df = pd.read_csv(otuTable,sep="\t",index_col=0)
+    df.columns = df.columns.astype(str)
     df = df.reindex(list(otuId_tax_dict.keys()))
     df["taxonomy"] = list(otuId_tax_dict.values())
     df = df.groupby(["taxonomy"]).sum()
-    """
-    otuId_tax_dict = dict()
-    with open(blastOut,"r") as f:
-       for line in f.readlines():
-            try:
-                otuID = int(line.split("\t")[0].strip())
-            except ValueError:
-                otuID = line.split("\t")[0].strip()
-            percId = line.split("\t")[2]
-            desc = line.split("\t")[1]
-            if(float(percId) >= float(blastcutoff)):
-                genus = desc.split("_")[1]
-                otuId_tax_dict[otuID] = genus
-    df = pd.read_csv(otuTable,sep="\t",index_col=0)
-    df = df.reindex(list(otuId_tax_dict.keys()))
-    df["taxonomy"] = list(otuId_tax_dict.values())
-    df = df.groupby(["taxonomy"]).sum()
-    """
     return otuId_tax_dict,df
      
 
@@ -102,7 +85,7 @@ def makeTable16S(df,func,taxonomyList):
     del(temp_dict)
     return df_consolidated
 
-def makeKOTable(df,abundData,coreNum,df_cutOff):
+def makeKOTable(df,abundData,coreNum):
     """
     Consolidate the KO copy number table with respect to OTU table
     Args:

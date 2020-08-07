@@ -11,6 +11,8 @@ __maintainer__ = "Dattatray Mongad"
 
 long_description = ("MicFunPred prediction tool")
 
+files = [os.path.join(r,i).replace('micfunpreDefinitions/','') for r,d,f in os.walk('micfunpreDefinitions/data/') for i in f ]
+
 setup(name='MicFunPred',
       version=__version__,
       description=('MicFunPred prediction'),
@@ -18,11 +20,8 @@ setup(name='MicFunPred',
       url='https://github.com/microDM/MicFunPred',
       packages=['micfunpreDefinitions'],
       scripts=glob('scripts/*py'),
-      install_requires=['biopython', 'numpy'],
+      install_requires=['biopython==1.76', 'numpy==1.18.1','pandas==1.0.5'],
       package_data={'micfunpreDefinitions':
-                    ['data/db/*',
-                     'data/other/*',
-                     'data/phenotype/*',
-                     'data/*',
-                     'data/db/blastDB/*']},
+                    files},
+      #data_files=files,
       long_description=long_description)

@@ -14,6 +14,7 @@ import numpy as np
 import subprocess
 import os
 import re
+import sys
 
 def baseDir():
     """Return baseDir of installation
@@ -33,12 +34,17 @@ def blast(query,db,in_numCores,cwd):
     Returns:
         None
     """
-    cmd = "blastn -out " + cwd + "/out.blast -outfmt 6 -query " + query + " -db " + db + " -num_threads " + in_numCores + " -max_target_seqs 1"
+    if(sys.platform == 'linux'):
+        cmd = "blastn -out " + os.path.join(cwd,"out.blast") + " -outfmt 6 -query " + query + " -db " + db + " -num_threads " + in_numCores + " -max_target_seqs 1"
+    elif(sys.platform == 'win32'):
+        cmd = "blastn.exe -out " + os.path.join(cwd,"out.blast") + " -outfmt 6 -query " + query + " -db " + db + " -num_threads " + in_numCores + " -max_target_seqs 1"
     subBlast = subprocess.Popen(cmd,stdin=subprocess.PIPE,stderr=subprocess.PIPE,shell=True)
     output,error = subBlast.communicate()
+    if(subBlast.returncode != 0):
+        exit(error)
     return None
 
-def selectBlastHits_assignGenus_subsetOtuTable(blastOut,otuTable,blastcutoff,level):
+def selectBlastHits_assignGenus_subsetOtuTable(blastOut,otuTable,blastcutoff):
     """
     Select best hits from BLAST output and assign taxonmy with respect to given identity cutoff
     Args:
@@ -111,30 +117,6 @@ def makeKOTable(df,abundData,coreNum):
     dfToReturn.index = taxonomyList
     #replace NA with 0
     dfToReturn = dfToReturn.fillna(0)
-    """
-    # new
-    # predict cut-offs
-    taxonomyList = list(abundData.index)
-    dfToReturn = pd.DataFrame()
-    cutOffDict = dict()
-    for tax in taxonomyList:
-        half = df_cutOff.loc[tax]*coreNum
-        cutOff = int(df_cutOff.loc[tax].lt(half).idxmax())*0.01
-        cutOffDict[tax] = cutOff
-    # predict genes based on predicted cut-offs
-    for tax in taxonomyList:
-        temp_df = df[df.index.str.contains(tax,na=False)]
-        n = round(temp_df.shape[0]*cutOffDict[tax])
-        temp_df = temp_df[temp_df.columns[temp_df.astype(bool).sum()>=n]]
-        median_series = temp_df.median()
-        median_series[median_series.between(0,1,False)] = 1
-        #median_df = pd.Series.to_frame(median_series).transpose().round()
-        median_df = pd.Series.to_frame(median_series).transpose()
-        dfToReturn = dfToReturn.append(median_df, ignore_index = True,sort=False)
-    dfToReturn.index = taxonomyList
-    #replace NA with 0
-    dfToReturn = dfToReturn.fillna(0)
-    """
     return dfToReturn
 
 def addAnnotations(metagenomeDf,keggFile):
@@ -177,30 +159,36 @@ def runMinPath(metagenomeDf,funpredPath,outPath,typeOfPrediction):
     """
     #make input for minPath and run MinPath
     if(typeOfPrediction == "kegg"):
-        with open(outPath + "/minpath_in.ko","w") as f:
+        with open(os.path.join(outPath,'minpath_in.ko'),"w") as f:
             for i,j in enumerate(list(metagenomeDf.index)):
                     f.write(str(i) + "\t" + str(j)+"\n")
-        cmd = "python2 " + funpredPath  +  "/MinPath1.4_micfunpred.py " + funpredPath + " " + outPath + " -ko " + outPath + "/minpath_in.ko -report " + outPath + "/minpath.out"
+        if(sys.platform == 'linux'):
+            cmd = "python3 " + os.path.join(funpredPath,'MinPath1.4_micfunpred.py') + " " + funpredPath + " " + outPath + " -ko " + os.path.join(outPath,'minpath_in.ko') + " -report " + os.path.join(outPath,'minpath.out')
+        elif(sys.platform == 'win32'):
+            cmd = "python.exe " + os.path.join(funpredPath,'MinPath1.4_micfunpred.py') + " " + funpredPath + " " + outPath + " -ko " + os.path.join(outPath,'minpath_in.ko') + " -report " + os.path.join(outPath,'minpath.out')
         a = os.popen(cmd).read()
-        minPathOutDF = pd.read_csv(outPath + "/minpath.out", sep="\t", index_col=0, header=None)
+        minPathOutDF = pd.read_csv(os.path.join(outPath,'minpath.out'), sep="\t", index_col=0, header=None)
         predictedMaps = ["ko" + x.replace("path ", "") for x in
                          list(minPathOutDF[minPathOutDF[3] == "minpath 1"].index)]
         temp = pd.DataFrame()
         for i in predictedMaps:
             temp = temp.append(metagenomeDf[metagenomeDf["C"].str.contains(i, na=False)])
-        temp.to_csv(outPath + "/KO_metagenome_minPath_pruned.txt", sep="\t")
+        temp.to_csv(os.path.join(outPath,'KO_metagenome_minPath_pruned.txt'), sep="\t")
         #os.remove(outPath + "/temp.ko")
         return temp
     elif(typeOfPrediction == "metacyc"):
         minpathOutFiles = []
         for sampleName in metagenomeDf.columns:
-            minPtahInFile = outPath + "/" + sampleName + "_minpath_in.txt"
+            minPtahInFile = os.path.join(outPath,sampleName + '_minpath_in.txt')
             #make list of files
-            minpathOutFiles.append(outPath + "/" +sampleName + "_minpath.out.details")
+            minpathOutFiles.append(os.path.join(outPath,sampleName + '_minpath.out.details'))
             #create input file and run MinPath
             minPtahInFile_fh = open(minPtahInFile,"w")
             minPtahInFile_fh.writelines(['read' + str(i) + "\t" + str(j) + "\n" for i,j in enumerate(list(metagenomeDf[metagenomeDf[sampleName]>0].index))])
-            cmd = "python2 " + funpredPath + "/MinPath1.4_micfunpred.py " + funpredPath + " " + outPath + " -any " + minPtahInFile + " -map " + funpredPath + "/data/path_to_RXN.txt -report " + outPath + "/" + sampleName + "_minpath.out -details " + outPath + "/" + sampleName + "_minpath.out.details"
+            if(sys.platform == 'linux'):
+                cmd = "python3 " + os.path.join(funpredPath,'MinPath1.4_micfunpred.py') + ' ' + funpredPath + " " + outPath + " -any " + minPtahInFile + " -map " + os.path.join(funpredPath,'data','path_to_RXN.txt') + " -report " + os.path.join(outPath,sampleName + '_minpath.out') + " -details " + os.path.join(outPath,sampleName + '_minpath.out.details')
+            elif(sys.platform == 'win32'):
+                cmd = "python3.exe " + os.path.join(funpredPath,'MinPath1.4_micfunpred.py') + ' ' + funpredPath + " " + outPath + " -any " + minPtahInFile + " -map " + os.path.join(funpredPath,'data','path_to_RXN.txt') + " -report " + os.path.join(outPath,sampleName + '_minpath.out') + " -details " + os.path.join(outPath,sampleName + '_minpath.out.details')
             a = os.popen(cmd).read()
         #create pathway abundance dataframe from all files
         metagenomeDf_reindexed = metagenomeDf.copy()

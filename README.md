@@ -1,6 +1,4 @@
-[<img src="logo.jpeg" width=1000 height=175>](http://210.212.161.138/MicFunPred/)
-# MicFunPred:
-## A conserved approach to predict functional profiles from 16S sequence data
+[<img src="logo.jpeg" width=900 height=175>](http://210.212.161.138/MicFunPred/)
 
 ### Motivation: 
 There are multiple tools availbale for the prediction of functional profiles like PICRUSt, Piphillin, Tax4Fun and others. These tools predicts the gene contents of organism without sequenced genomes (at strain level) by using phylogenetic or non-phylogenetic approaches. But, taxonomic identification using one or multiple variable regions of 16S rRNA gene beyond genus level may not be reliable. Secondly, due to database dependency and ever growing reference database size, regular updates are required by these tools. Hence, we proposed a conserved approach to predict gene contents of each genera by considering core genes.

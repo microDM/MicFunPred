@@ -82,3 +82,54 @@ optional arguments:
                         (Optional) number of threads to be used. (default: 1)
   -v, --verbose         Print message of each step to stdout.
 ```
+Example:
+
+`MicFunPred_run_pipeline.py -i test_data/test_counts.tsv -r test_data/test.fasta -o test_data/micfunpred_out --verbose`
+
+The output directory will have following files:
+```
+├── COG_metagenome
+│   ├── COG_metagenome.txt
+│   └── COG_metagenome_with_description.txt
+├── KO_metagenome
+│   ├── KO_metagenome_minPath_pruned.txt
+│   ├── KO_metagenome.txt
+│   ├── KO_metagenome_with_description.txt
+│   ├── minpath_in.ko
+│   ├── minpath.out
+│   ├── summarized_by_A.txt
+│   ├── summarized_by_B.txt
+│   ├── summarized_by_C.txt
+│   └── summarized_by_Pathway_Module.txt
+├── MetaCyc_metagenome
+│   ├── EC_metagenome.txt
+│   ├── minPath_files
+│   │   ├── sample1_minpath_in.txt
+│   │   ├── sample1_minpath.out
+│   │   ├── sample1_minpath.out.details
+│   │   ├── sample2_minpath_in.txt
+│   │   ├── sample2_minpath.out
+│   │   ├── sample2_minpath.out.details
+│   │   ├── sample3_minpath_in.txt
+│   │   ├── sample3_minpath.out
+│   │   └── sample3_minpath.out.details
+│   ├── PathwayAbundance.table
+│   ├── PathwayAbundance_with_names.table
+│   ├── Pathway_summarize_by_Types.table
+│   └── RXN_metagenome.txt
+├── out.blast
+├── Pfam_metagenome
+│   ├── Pfam_metagenome.txt
+│   └── Pfam_metagenome_with_description.txt
+├── predicted_16S_copy_numbers.txt
+├── predicted_COG.txt
+├── predicted_EC.txt
+├── predicted_KO.txt
+├── predicted_Pfam.txt
+├── predicted_TIGRFAM.txt
+├── tax_abund_normalized.table
+├── tax_abund.table
+└── TIGRFAM_metagenome
+    ├── TIGRFAM_metagenome.txt
+    └── TIGRFAM_metagenome_with_description.txt
+```

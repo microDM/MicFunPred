@@ -38,9 +38,9 @@ MinPath is used to predict KEGG and MetaCyc pathways with more stringency.
 
 #### 2. Install from source
 
-`git clone git@github.com:microDM/MicFunPred.git
+`git clone git@github.com:microDM/MicFunPred.git`
 
-cd MicFunPred`
+`cd MicFunPred`
 
 `sudo python setup.py install`
 

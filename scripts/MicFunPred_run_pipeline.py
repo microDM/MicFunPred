@@ -116,29 +116,29 @@ if (in_verbose):
 copyNumberTable_gene = pd.read_parquet(os.path.join(dbPath,'ko.parq'))
 copyNumberTable_gene_consolidated = fp.makeKOTable(copyNumberTable_gene, abundTable, in_coreperc).fillna(0)
 del copyNumberTable_gene # remove large table to save memory
-copyNumberTable_gene_consolidated.to_csv(os.path.join(cwd,'predicted_KO.txt'), sep="\t")
+copyNumberTable_gene_consolidated.to_csv(os.path.join(cwd,'predicted_KO.tsv.gz'), sep="\t",compression='gzip')
 # 2. Multiplication
 if (in_verbose):
     print("Predicting KO metagenome")
 final_df = abundTable.transpose().dot(copyNumberTable_gene_consolidated).transpose()
 final_df = final_df.loc[final_df.sum(axis=1) != 0]
 os.mkdir(os.path.join(cwd,'KO_metagenome'))
-final_df.to_csv(os.path.join(cwd,'KO_metagenome','KO_metagenome.txt'), sep="\t")
+final_df.to_csv(os.path.join(cwd,'KO_metagenome','KO_metagenome.tsv.gz'), sep="\t",compression='gzip')
 del copyNumberTable_gene_consolidated
 # 3. Add description
 if (in_verbose):
     print("Anotating predicted metagenome")
 final_df = fp.addAnnotations(final_df, os.path.join(otherPath,'ko00001.txt'))
-final_df.to_csv(os.path.join(cwd,'KO_metagenome','KO_metagenome_with_description.txt'), sep="\t")
+final_df.to_csv(os.path.join(cwd,'KO_metagenome','KO_metagenome_with_description.tsv.gz'), sep="\t",compression='gzip')
 # 4. MinPath
 if (in_verbose):
     print("Running MinPath (KO)")
 final_df = fp.runMinPath(final_df, funpredPath, os.path.join(cwd,'KO_metagenome'), "kegg")
 # 5. Groupby levels
-fp.summarizeByFun(final_df, "A").to_csv(os.path.join(cwd,'KO_metagenome','summarized_by_A.txt'), sep="\t")
-fp.summarizeByFun(final_df, "B").to_csv(os.path.join(cwd,'KO_metagenome','summarized_by_B.txt'), sep="\t")
-fp.summarizeByFun(final_df, "C").to_csv(os.path.join(cwd,'KO_metagenome','summarized_by_C.txt'), sep="\t")
-fp.summarizeByFun(final_df, "Pathway_Module").to_csv(os.path.join(cwd,'KO_metagenome','summarized_by_Pathway_Module.txt'),sep="\t")
+fp.summarizeByFun(final_df, "A").to_csv(os.path.join(cwd,'KO_metagenome','summarized_by_A.tsv.gz'), sep="\t",compression='gzip')
+fp.summarizeByFun(final_df, "B").to_csv(os.path.join(cwd,'KO_metagenome','summarized_by_B.tsv.gz'), sep="\t",compression='gzip')
+fp.summarizeByFun(final_df, "C").to_csv(os.path.join(cwd,'KO_metagenome','summarized_by_C.tsv.gz'), sep="\t",compression='gzip')
+fp.summarizeByFun(final_df, "Pathway_Module").to_csv(os.path.join(cwd,'KO_metagenome','summarized_by_Pathway_Module.tsv.gz'),sep="\t",compression='gzip')
 del final_df
 
 # EC prediction
@@ -148,29 +148,29 @@ if (in_verbose):
 copyNumberTable_gene = pd.read_parquet(os.path.join(dbPath,'ec.parq'))
 copyNumberTable_gene_consolidated = fp.makeKOTable(copyNumberTable_gene, abundTable, in_coreperc).fillna(0)
 del copyNumberTable_gene # remove large table to save memory
-copyNumberTable_gene_consolidated.to_csv(os.path.join(cwd,'predicted_EC.txt'), sep="\t")
+copyNumberTable_gene_consolidated.to_csv(os.path.join(cwd,'predicted_EC.tsv.gz'), sep="\t",compression='gzip')
 # 2. Multiplication
 if (in_verbose):
     print("Predicting EC metagenome")
 final_df = abundTable.transpose().dot(copyNumberTable_gene_consolidated).transpose()
 final_df = final_df.loc[final_df.sum(axis=1) != 0]
 os.mkdir(os.path.join(cwd,'MetaCyc_metagenome'))
-final_df.to_csv(os.path.join(cwd,'MetaCyc_metagenome','EC_metagenome.txt'), sep="\t")
+final_df.to_csv(os.path.join(cwd,'MetaCyc_metagenome','EC_metagenome.tsv.gz'), sep="\t",compression='gzip')
 del copyNumberTable_gene_consolidated
 # 3. MinPath
 if (in_verbose):
     print("Running MinPath (RXN)")
 final_df = fp.ec2RXN(final_df, os.path.join(otherPath,'ec2rxn_new'))
-final_df.to_csv(os.path.join(cwd,'MetaCyc_metagenome','RXN_metagenome.txt'), sep="\t")
+final_df.to_csv(os.path.join(cwd,'MetaCyc_metagenome','RXN_metagenome.tsv.gz'), sep="\t", compression='gzip')
 os.mkdir(os.path.join(cwd,'MetaCyc_metagenome','minPath_files'))
 final_df = fp.runMinPath(final_df, funpredPath, os.path.join(cwd,'MetaCyc_metagenome','minPath_files'),
                                           "metacyc")
-final_df.to_csv(os.path.join(cwd,'MetaCyc_metagenome','PathwayAbundance.table'), sep="\t")
+final_df.to_csv(os.path.join(cwd,'MetaCyc_metagenome','PathwayAbundance.tsv.gz'), sep="\t", compression='gzip')
 # 4. Groupby levels
 final_df = fp.addMetaCycPathwayName(final_df, os.path.join(otherPath,'path_to_Name.txt'))
-final_df.to_csv(os.path.join(cwd,'MetaCyc_metagenome','PathwayAbundance_with_names.table'), sep="\t")
+final_df.to_csv(os.path.join(cwd,'MetaCyc_metagenome','PathwayAbundance_with_names.tsv.gz'), sep="\t",compression='gzip')
 fp.summarizeByFun(final_df, "Type").to_csv(
-    os.path.join(cwd,'MetaCyc_metagenome','Pathway_summarize_by_Types.table'), sep="\t")
+    os.path.join(cwd,'MetaCyc_metagenome','Pathway_summarize_by_Types.tsv.gz'), sep="\t", compression='gzip')
 del final_df
 
 # Pfam prediction
@@ -180,16 +180,16 @@ if (in_verbose):
 copyNumberTable_gene = pd.read_parquet(os.path.join(dbPath,'pfam.parq'))    
 copyNumberTable_gene_consolidated = fp.makeKOTable(copyNumberTable_gene, abundTable, in_coreperc).fillna(0)
 del copyNumberTable_gene
-copyNumberTable_gene_consolidated.to_csv(os.path.join(cwd,'predicted_Pfam.txt'), sep="\t")
+copyNumberTable_gene_consolidated.to_csv(os.path.join(cwd,'predicted_Pfam.tsv.gz'), sep="\t", compression='gzip')
 # 2. Multiplication
 final_df = abundTable.transpose().dot(copyNumberTable_gene_consolidated).transpose().round()
 final_df = final_df.loc[final_df.sum(axis=1) != 0]
 os.mkdir(os.path.join(cwd,'Pfam_metagenome'))
-final_df.to_csv(os.path.join(cwd,'Pfam_metagenome','Pfam_metagenome.txt'), sep="\t")
+final_df.to_csv(os.path.join(cwd,'Pfam_metagenome','Pfam_metagenome.tsv.gz'), sep="\t", compression='gzip')
 del copyNumberTable_gene_consolidated
 # 3. Add description
 final_df = fp.addAnnotations(final_df, os.path.join(otherPath,'pfam_mapping.txt'))
-final_df.to_csv(os.path.join(cwd,'Pfam_metagenome','Pfam_metagenome_with_description.txt'), sep="\t")
+final_df.to_csv(os.path.join(cwd,'Pfam_metagenome','Pfam_metagenome_with_description.tsv.gz'), sep="\t", compression='gzip')
 del final_df
 
 # COG prediction
@@ -199,16 +199,16 @@ if (in_verbose):
 copyNumberTable_gene = pd.read_parquet(os.path.join(dbPath,'cog.parq'))
 copyNumberTable_gene_consolidated = fp.makeKOTable(copyNumberTable_gene, abundTable, in_coreperc).fillna(0)
 del copyNumberTable_gene
-copyNumberTable_gene_consolidated.to_csv(os.path.join(cwd,'predicted_COG.txt'), sep="\t")
+copyNumberTable_gene_consolidated.to_csv(os.path.join(cwd,'predicted_COG.tsv.gz'), sep="\t", compression='gzip')
 # 2. Multiplication
 final_df = abundTable.transpose().dot(copyNumberTable_gene_consolidated).transpose().round()
 final_df = final_df.loc[final_df.sum(axis=1) != 0]
 os.mkdir(os.path.join(cwd,'COG_metagenome'))
-final_df.to_csv(os.path.join(cwd,'COG_metagenome','COG_metagenome.txt'), sep="\t")
+final_df.to_csv(os.path.join(cwd,'COG_metagenome','COG_metagenome.tsv.gz'), sep="\t", compression='gzip')
 del copyNumberTable_gene_consolidated
 # 3. Add description
 final_df = fp.addAnnotations(final_df, os.path.join(otherPath,'cognames2003-2014.tab'))
-final_df.to_csv(os.path.join(cwd,'COG_metagenome','COG_metagenome_with_description.txt'), sep="\t")
+final_df.to_csv(os.path.join(cwd,'COG_metagenome','COG_metagenome_with_description.tsv.gz'), sep="\t", compression='gzip')
 del final_df
 
 # TIGRFAM prediction
@@ -218,16 +218,16 @@ if (in_verbose):
 copyNumberTable_gene = pd.read_parquet(os.path.join(dbPath,'tigrfam.parq'))
 copyNumberTable_gene_consolidated = fp.makeKOTable(copyNumberTable_gene, abundTable, in_coreperc).fillna(0)
 del copyNumberTable_gene
-copyNumberTable_gene_consolidated.to_csv(os.path.join(cwd,'predicted_TIGRFAM.txt'), sep="\t")
+copyNumberTable_gene_consolidated.to_csv(os.path.join(cwd,'predicted_TIGRFAM.tsv.gz'), sep="\t", compression='gzip')
 # 2. Multiplication
 final_df = abundTable.transpose().dot(copyNumberTable_gene_consolidated).transpose().round()
 final_df = final_df.loc[final_df.sum(axis=1) != 0]
 os.mkdir(os.path.join(cwd,'TIGRFAM_metagenome'))
-final_df.to_csv(os.path.join(cwd,'TIGRFAM_metagenome','TIGRFAM_metagenome.txt'), sep="\t")
+final_df.to_csv(os.path.join(cwd,'TIGRFAM_metagenome','TIGRFAM_metagenome.tsv.gz'), sep="\t", compression='gzip')
 del copyNumberTable_gene_consolidated
 # 3. Add description
 final_df = fp.addAnnotations(final_df, os.path.join(otherPath,'TIGRFAMs_9.0_INFO.txt'))
-final_df.to_csv(os.path.join(cwd,'TIGRFAM_metagenome','TIGRFAM_metagenome_with_description.txt'), sep="\t")
+final_df.to_csv(os.path.join(cwd,'TIGRFAM_metagenome','TIGRFAM_metagenome_with_description.tsv.gz'), sep="\t", compression='gzip')
 del final_df
 
 timeTaken = round(time.time() - start_time, 2)

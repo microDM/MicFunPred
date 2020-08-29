@@ -177,6 +177,6 @@ The output directory will have following files:
 
 ### Percent contribution of each taxon in KEGG pathways
 
-![Taxon contribution](taxon-contrib.png)
+![Taxon contribution](taxon-contrib.jpeg)
 
 This plot is generated using [Python plotly==4.9.0](https://plotly.com/python/). Different pathways can be browse using dropdown button and plots can be saved in '.png' format.

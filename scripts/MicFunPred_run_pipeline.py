@@ -11,33 +11,42 @@ Created on 22-Feb-2019
 '''
 import argparse
 from micfunpreDefinitions import micfunpreDefinitions as fp
+import micfunpreDefinitions.plotContrib as plt
 import pandas as pd
 import warnings
 import os
 import shutil
 import time
 import subprocess
+import gzip
 
 # make options
 parser = argparse.ArgumentParser()
-parser.add_argument("-i", "--otu_table", metavar="PATH",type=str,
-                  help="[Required] Tab delimited OTU table")
-parser.add_argument("-r", "--repset_seq",metavar="PATH",type=str,
-                  help="[Required] Multi-fasta file of OTU/ASV sequences")
-parser.add_argument("-p", "--perc_ident",type=float,
+required_opts = parser.add_argument_group('Required')
+required_opts.add_argument("-i", "--otu_table", metavar="PATH",type=str,
+                  help="Tab delimited OTU table")
+required_opts.add_argument("-r", "--repset_seq",metavar="PATH",type=str,
+                  help="Multi-fasta file of OTU/ASV sequences")
+
+optional_opts = parser.add_argument_group('Optional')
+optional_opts.add_argument("-p", "--perc_ident",type=float,
                   help="[Optional] Percent identity cut-off to assign genus. (default: 97)", default=98.3)
-parser.add_argument("-b","--blastout",type=str,help="Blast output of ASV/OTU sequences with any database in output format 6",
+optional_opts.add_argument("-b","--blastout",type=str,help="Blast output of ASV/OTU sequences with any database in output format 6",
                     default=None,metavar="PATH")
-parser.add_argument("-c", "--coreper",type=str, default=0.5,
+optional_opts.add_argument("-c", "--genecov",type=str, default=0.5,
                   help="[Optional] Percentage of organism in a genus which should have gene to define it as core. Value ranges "
                        "from 0 to 1 (default: 0.5)")
-parser.add_argument("-o", "--output", type=str,metavar="PATH",
-                  help="[Optional] Output directory (default: funpred_out)",
-                  default="funpred_out")
-parser.add_argument("-t", "--threads",type=str,metavar="INT",
+optional_opts.add_argument("-o", "--output", type=str,metavar="PATH",
+                  help="[Optional] Output directory (default: MicFunPred_out)",
+                  default="MicFunPred_out")
+optional_opts.add_argument("-t", "--threads",type=str,metavar="INT",
                   help="(Optional) number of threads to be used. (default: 1)", default="1")
-parser.add_argument("-v", "--verbose", action="store_true", default=False,
+optional_opts.add_argument("-v", "--verbose", action="store_true", default=False,
                   help="Print message of each step to stdout.")
+optional_opts.add_argument('--contrib',help='Calculate taxon contribution of functions',
+                  action='store_true',   default=False)
+optional_opts.add_argument('--plot',help='Plot contribution for KEGG pathways',action='store_true',
+                default=False)
 
 # if required option does not provided exit
 options = parser.parse_args()
@@ -49,9 +58,11 @@ else:
     in_out = options.output
     in_numCores = options.threads
     in_percIdentCutOff = options.perc_ident
-    in_coreperc = float(options.coreper)
+    in_coreperc = float(options.genecov)
     in_verbose = options.verbose
     in_blastout = options.blastout
+    in_contrib = options.contrib
+    in_plot = options.plot
 
 ###########################################        MAIN         ######################33
 
@@ -124,17 +135,35 @@ final_df = abundTable.transpose().dot(copyNumberTable_gene_consolidated).transpo
 final_df = final_df.loc[final_df.sum(axis=1) != 0]
 os.mkdir(os.path.join(cwd,'KO_metagenome'))
 final_df.to_csv(os.path.join(cwd,'KO_metagenome','KO_metagenome.tsv.gz'), sep="\t",compression='gzip')
-del copyNumberTable_gene_consolidated
-# 3. Add description
+# 3. Contribution to genes
+if(in_contrib):
+    # gene
+    fh = gzip.open(os.path.join(cwd,'KO_metagenome','KO_taxon_contrib.tsv.gz'),'w')
+    fp.calculateGeneContribution(abundTable,copyNumberTable_gene_consolidated,final_df,fh)
+    fh.close()
+
+# 4. Add description
 if (in_verbose):
     print("Anotating predicted metagenome")
 final_df = fp.addAnnotations(final_df, os.path.join(otherPath,'ko00001.txt'))
 final_df.to_csv(os.path.join(cwd,'KO_metagenome','KO_metagenome_with_description.tsv.gz'), sep="\t",compression='gzip')
-# 4. MinPath
+# 5. Contribution to pathways
+if(in_contrib):
+    fh = gzip.open(os.path.join(cwd,'KO_metagenome','KO_level_taxon_contrib.tsv.gz'),'w')
+    fp.calculateDescriptContribution(abundTable,copyNumberTable_gene_consolidated,final_df,os.path.join(cwd,'KO_metagenome','KO_taxon_contrib.tsv.gz'),os.path.join(otherPath,'ko00001.txt'),fh)
+    fh.close()
+    if(in_plot):
+        fig = plt.plotDescription(os.path.join(cwd,'KO_metagenome','KO_level_taxon_contrib.tsv.gz'))
+        fig.write_html(os.path.join(cwd,'KO_metagenome','KO_level_taxon_contrib.html'))
+        del fig
+
+del copyNumberTable_gene_consolidated
+
+# 6. MinPath
 if (in_verbose):
     print("Running MinPath (KO)")
 final_df = fp.runMinPath(final_df, funpredPath, os.path.join(cwd,'KO_metagenome'), "kegg")
-# 5. Groupby levels
+# 7. Groupby levels
 fp.summarizeByFun(final_df, "A").to_csv(os.path.join(cwd,'KO_metagenome','summarized_by_A.tsv.gz'), sep="\t",compression='gzip')
 fp.summarizeByFun(final_df, "B").to_csv(os.path.join(cwd,'KO_metagenome','summarized_by_B.tsv.gz'), sep="\t",compression='gzip')
 fp.summarizeByFun(final_df, "C").to_csv(os.path.join(cwd,'KO_metagenome','summarized_by_C.tsv.gz'), sep="\t",compression='gzip')
@@ -156,8 +185,13 @@ final_df = abundTable.transpose().dot(copyNumberTable_gene_consolidated).transpo
 final_df = final_df.loc[final_df.sum(axis=1) != 0]
 os.mkdir(os.path.join(cwd,'MetaCyc_metagenome'))
 final_df.to_csv(os.path.join(cwd,'MetaCyc_metagenome','EC_metagenome.tsv.gz'), sep="\t",compression='gzip')
+# 3. Contribution to genes
+if(in_contrib):
+    fh = gzip.open(os.path.join(cwd,'MetaCyc_metagenome','EC_taxon_contrib.tsv.gz'),'w')
+    fp.calculateGeneContribution(abundTable,copyNumberTable_gene_consolidated,final_df,fh)
+    fh.close()
 del copyNumberTable_gene_consolidated
-# 3. MinPath
+# 4. MinPath
 if (in_verbose):
     print("Running MinPath (RXN)")
 final_df = fp.ec2RXN(final_df, os.path.join(otherPath,'ec2rxn_new'))
@@ -166,7 +200,7 @@ os.mkdir(os.path.join(cwd,'MetaCyc_metagenome','minPath_files'))
 final_df = fp.runMinPath(final_df, funpredPath, os.path.join(cwd,'MetaCyc_metagenome','minPath_files'),
                                           "metacyc")
 final_df.to_csv(os.path.join(cwd,'MetaCyc_metagenome','PathwayAbundance.tsv.gz'), sep="\t", compression='gzip')
-# 4. Groupby levels
+# 5. Groupby levels
 final_df = fp.addMetaCycPathwayName(final_df, os.path.join(otherPath,'path_to_Name.txt'))
 final_df.to_csv(os.path.join(cwd,'MetaCyc_metagenome','PathwayAbundance_with_names.tsv.gz'), sep="\t",compression='gzip')
 fp.summarizeByFun(final_df, "Type").to_csv(
@@ -186,8 +220,13 @@ final_df = abundTable.transpose().dot(copyNumberTable_gene_consolidated).transpo
 final_df = final_df.loc[final_df.sum(axis=1) != 0]
 os.mkdir(os.path.join(cwd,'Pfam_metagenome'))
 final_df.to_csv(os.path.join(cwd,'Pfam_metagenome','Pfam_metagenome.tsv.gz'), sep="\t", compression='gzip')
+# 3. Contribution to genes
+if(in_contrib):
+    fh = gzip.open(os.path.join(cwd,'Pfam_metagenome','Pfam_taxon_contrib.tsv.gz'),'w')
+    fp.calculateGeneContribution(abundTable,copyNumberTable_gene_consolidated,final_df,fh)
+    fh.close()
 del copyNumberTable_gene_consolidated
-# 3. Add description
+# 4. Add description
 final_df = fp.addAnnotations(final_df, os.path.join(otherPath,'pfam_mapping.txt'))
 final_df.to_csv(os.path.join(cwd,'Pfam_metagenome','Pfam_metagenome_with_description.tsv.gz'), sep="\t", compression='gzip')
 del final_df
@@ -205,8 +244,13 @@ final_df = abundTable.transpose().dot(copyNumberTable_gene_consolidated).transpo
 final_df = final_df.loc[final_df.sum(axis=1) != 0]
 os.mkdir(os.path.join(cwd,'COG_metagenome'))
 final_df.to_csv(os.path.join(cwd,'COG_metagenome','COG_metagenome.tsv.gz'), sep="\t", compression='gzip')
+# 3. Contribution to genes
+if(in_contrib):
+    fh = gzip.open(os.path.join(cwd,'COG_metagenome','COG_taxon_contrib.tsv.gz'),'w')
+    fp.calculateGeneContribution(abundTable,copyNumberTable_gene_consolidated,final_df,fh)
+    fh.close()
 del copyNumberTable_gene_consolidated
-# 3. Add description
+# 4. Add description
 final_df = fp.addAnnotations(final_df, os.path.join(otherPath,'cognames2003-2014.tab'))
 final_df.to_csv(os.path.join(cwd,'COG_metagenome','COG_metagenome_with_description.tsv.gz'), sep="\t", compression='gzip')
 del final_df
@@ -224,8 +268,13 @@ final_df = abundTable.transpose().dot(copyNumberTable_gene_consolidated).transpo
 final_df = final_df.loc[final_df.sum(axis=1) != 0]
 os.mkdir(os.path.join(cwd,'TIGRFAM_metagenome'))
 final_df.to_csv(os.path.join(cwd,'TIGRFAM_metagenome','TIGRFAM_metagenome.tsv.gz'), sep="\t", compression='gzip')
+# 3. Contribution to genes
+if(in_contrib):
+    fh = gzip.open(os.path.join(cwd,'TIGRFAM_metagenome','TIGRFAM_taxon_contrib.tsv.gz'),'w')
+    fp.calculateGeneContribution(abundTable,copyNumberTable_gene_consolidated,final_df,fh)
+    fh.close()
 del copyNumberTable_gene_consolidated
-# 3. Add description
+# 4. Add description
 final_df = fp.addAnnotations(final_df, os.path.join(otherPath,'TIGRFAMs_9.0_INFO.txt'))
 final_df.to_csv(os.path.join(cwd,'TIGRFAM_metagenome','TIGRFAM_metagenome_with_description.tsv.gz'), sep="\t", compression='gzip')
 del final_df

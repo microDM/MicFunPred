@@ -34,104 +34,149 @@ MinPath is used to predict KEGG and MetaCyc pathways with more stringency.
 ## Instalation:
 
 #### 1. Install from PyPI
-`sudo python -m pip install MicFunPred`
+```
+sudo python -m pip install MicFunPred
+```
 
 #### 2. Install from source
 
-`git clone git@github.com:microDM/MicFunPred.git`
+```
+git clone git@github.com:microDM/MicFunPred.git
 
-`cd MicFunPred`
+cd MicFunPred
 
-`sudo python setup.py install`
+sudo python setup.py install
+```
 
 OR
 
-`sudo python -m pip install .`
+```
+git clone git@github.com:microDM/MicFunPred.git
+
+cd MicFunPred
+
+sudo python -m pip install .
+```
 
 #### Dependencies:
 
 #### 1. NCBI-BLAST
-`sudo apt-get install ncbi-blast+`
+```
+sudo apt-get install ncbi-blast+
+```
 
 For windows download from [NCBI website](https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/) and add blastn.exe to system environment variable.
 
 #### 2. GLPK-utils
-`sudo apt-get install glpk-utils`
+```
+sudo apt-get install glpk-utils
+```
 
 For windows download from [Sourceforge](https://sourceforge.net/projects/winglpk/) and add glpsol.exe to system environment variable.
 
 #### Running MicFunPred:
 
-```usage: MicFunPred_run_pipeline.py [-h] [-i PATH] [-r PATH] [-p PERC_IDENT] [-b PATH] [-c COREPER] [-o PATH] [-t INT] [-v]
+```
+usage: MicFunPred_run_pipeline.py [-h] [-i PATH] [-r PATH] [-p PERC_IDENT] [-b PATH] [-c GENECOV] [-o PATH] [-t INT] [-v] [--contrib]
+                                  [--plot]
 
 optional arguments:
   -h, --help            show this help message and exit
+
+Required:
   -i PATH, --otu_table PATH
-                        [Required] Tab delimited OTU table
+                        Tab delimited OTU table
   -r PATH, --repset_seq PATH
-                        [Required] Multi-fasta file of OTU/ASV sequences
+                        Multi-fasta file of OTU/ASV sequences
+
+Optional:
   -p PERC_IDENT, --perc_ident PERC_IDENT
                         [Optional] Percent identity cut-off to assign genus. (default: 97)
   -b PATH, --blastout PATH
                         Blast output of ASV/OTU sequences with any database in output format 6
-  -c COREPER, --coreper COREPER
+  -c GENECOV, --genecov GENECOV
                         [Optional] Percentage of organism in a genus which should have gene to define it as core. Value ranges from 0 to 1
                         (default: 0.5)
   -o PATH, --output PATH
-                        [Optional] Output directory (default: funpred_out)
+                        [Optional] Output directory (default: MicFunPred_out)
   -t INT, --threads INT
                         (Optional) number of threads to be used. (default: 1)
   -v, --verbose         Print message of each step to stdout.
+  --contrib             Calculate taxon contribution of functions
+  --plot                Plot contribution for KEGG pathways
 ```
-Example:
+### Example:
 
-`MicFunPred_run_pipeline.py -i test_data/test_counts.tsv -r test_data/test.fasta -o test_data/micfunpred_out --verbose`
+```
+MicFunPred_run_pipeline.py -i test_data/test_counts.tsv -r test_data/test.fasta -o test_data/micfunpred_out --verbose
+```
 
 The output directory will have following files:
 ```
 ├── COG_metagenome
-│   ├── COG_metagenome.txt
-│   └── COG_metagenome_with_description.txt
+│   ├── COG_metagenome.tsv.gz
+│   ├── COG_metagenome_with_description.tsv.gz
+│   └── COG_taxon_contrib.tsv.gz
 ├── KO_metagenome
+│   ├── KO_level_taxon_contrib.html
+│   ├── KO_level_taxon_contrib.tsv.gz
+│   ├── KO_metagenome.tsv.gz
 │   ├── KO_metagenome_minPath_pruned.txt
-│   ├── KO_metagenome.txt
-│   ├── KO_metagenome_with_description.txt
-│   ├── minpath_in.ko
+│   ├── KO_metagenome_with_description.tsv.gz
+│   ├── KO_taxon_contrib.tsv.gz
 │   ├── minpath.out
-│   ├── summarized_by_A.txt
-│   ├── summarized_by_B.txt
-│   ├── summarized_by_C.txt
-│   └── summarized_by_Pathway_Module.txt
+│   ├── minpath_in.ko
+│   ├── summarized_by_A.tsv.gz
+│   ├── summarized_by_B.tsv.gz
+│   ├── summarized_by_C.tsv.gz
+│   └── summarized_by_Pathway_Module.tsv.gz
 ├── MetaCyc_metagenome
-│   ├── minPath_files
-│   │   ├── sample1_minpath_in.txt
-│   │   ├── sample1_minpath.out
-│   │   ├── sample1_minpath.out.details
-│   │   ├── sample2_minpath_in.txt
-│   │   ├── sample2_minpath.out
-│   │   ├── sample2_minpath.out.details
-│   │   ├── sample3_minpath_in.txt
-│   │   ├── sample3_minpath.out
-│   │   └── sample3_minpath.out.details
-│   ├── EC_metagenome.txt
-│   ├── PathwayAbundance.table
-│   ├── PathwayAbundance_with_names.table
-│   ├── Pathway_summarize_by_Types.table
-│   └── RXN_metagenome.txt
+│   ├── EC_metagenome.tsv.gz
+│   ├── EC_taxon_contrib.tsv.gz
+│   ├── PathwayAbundance.tsv.gz
+│   ├── PathwayAbundance_with_names.tsv.gz
+│   ├── Pathway_summarize_by_Types.tsv.gz
+│   ├── RXN_metagenome.tsv.gz
+│   └── minPath_files
+│       ├── sample1_minpath.out
+│       ├── sample1_minpath.out.details
+│       ├── sample1_minpath_in.txt
+│       ├── sample2_minpath.out
+│       ├── sample2_minpath.out.details
+│       ├── sample2_minpath_in.txt
+│       ├── sample3_minpath.out
+│       ├── sample3_minpath.out.details
+│       ├── sample3_minpath_in.txt
+│       ├── sample4_minpath.out
+│       ├── sample4_minpath.out.details
+│       ├── sample4_minpath_in.txt
+│       ├── sample5_minpath.out
+│       ├── sample5_minpath.out.details
+│       └── sample5_minpath_in.txt
 ├── Pfam_metagenome
-│   ├── Pfam_metagenome.txt
-│   └── Pfam_metagenome_with_description.txt
+│   ├── Pfam_metagenome.tsv.gz
+│   ├── Pfam_metagenome_with_description.tsv.gz
+│   └── Pfam_taxon_contrib.tsv.gz
 ├── TIGRFAM_metagenome
-│   ├── TIGRFAM_metagenome.txt
-│   └── TIGRFAM_metagenome_with_description.txt
+│   ├── TIGRFAM_metagenome.tsv.gz
+│   ├── TIGRFAM_metagenome_with_description.tsv.gz
+│   └── TIGRFAM_taxon_contrib.tsv.gz
 ├── out.blast
 ├── predicted_16S_copy_numbers.txt
-├── predicted_COG.txt
-├── predicted_EC.txt
-├── predicted_KO.txt
-├── predicted_Pfam.txt
-├── predicted_TIGRFAM.txt
-├── tax_abund_normalized.table
-└── tax_abund.table
+├── predicted_COG.tsv.gz
+├── predicted_EC.tsv.gz
+├── predicted_KO.tsv.gz
+├── predicted_Pfam.tsv.gz
+├── predicted_TIGRFAM.tsv.gz
+├── tax_abund.table
+└── tax_abund_normalized.table
+
+6 directories, 51 files
 
 ```
+
+### Percent contribution of each taxon in KEGG pathways
+
+![Taxon contribution](taxon-contrib.png)
+
+This plot is generated using [Python plotly==4.9.0](https://plotly.com/python/). Different pathways can be browse using dropdown button and plots can be saved in '.png' format.

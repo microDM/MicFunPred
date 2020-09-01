@@ -40,12 +40,8 @@ sudo python -m pip install MicFunPred
 
 #### 2. Install from source
 
-<<<<<<< HEAD
-`git clone https://github.com/microDM/MicFunPred.git`
-=======
 ```
 git clone git@github.com:microDM/MicFunPred.git
->>>>>>> 0.0.2
 
 cd MicFunPred
 

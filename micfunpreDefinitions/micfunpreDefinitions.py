@@ -56,6 +56,7 @@ def selectBlastHits_assignGenus_subsetOtuTable(blastOut,otuTable,blastcutoff):
         DataFrame: OTU/ASV table containg OTUs/ASVs which have assigned taxonomy through BLAST
     """
     df = pd.read_csv(blastOut,sep='\t',index_col=0,header=None)
+    df = df.groupby(level=0).max()
     df = df.loc[df[2]>=blastcutoff]
     if(df.empty):
         exit('None of OTU/ASV sequences passed the given percent identity cut-off')

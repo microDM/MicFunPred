@@ -51,7 +51,7 @@ optional_opts.add_argument('--plot',help='Plot contribution for KEGG pathways',a
 # if required option does not provided exit
 options = parser.parse_args()
 if (options.otu_table and options.repset_seq) is None:
-    exit("Please provide all required inputs or type python3.6 runPrediction.py -h")
+    exit("Please provide all required inputs or type python3.6 MicFunPred_run_pipeline.py -h")
 else:
     in_otuTab = options.otu_table
     in_repSet = options.repset_seq

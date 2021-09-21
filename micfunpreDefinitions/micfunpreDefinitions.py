@@ -305,51 +305,46 @@ def subsetBacdive(df_blast,abundanceTable,bacdiveFileName):
     return df_bacdive
 
 def calculateGeneContribution(df_abund,df_ko_predicted,df_ko,fh):
-    fh.write(bytes('\t'.join(['taxon','gene','sample','taxon_abund','gene_abund','taxon_rel_abun','gene_rel_abund','gene_count_per_genome','taxon_contribution']).strip(),'utf-8'))
+    fh.write(bytes('\t'.join(['taxon','gene','sample','taxon_abund','gene_abund','taxon_rel_abun','gene_rel_abund','gene_count_per_genome','taxon_contribution','taxon_contribution_rel']).strip(),'utf-8'))
     fh.write(bytes('\n','utf-8'))
-    for c in df_abund.columns:
-        for i in df_abund.index:
-            tax = i
-            sample = c
-            tax_abundance = (df_abund.loc[i][sample])
-            tax_abundance_rel = tax_abundance/df_abund[sample].sum()
-            for k in set(df_ko_predicted.columns).intersection(df_ko.index):
-                gene = k
-                gene_abund = df_ko.loc[gene][sample]
-                gene_abund_rel = gene_abund/df_ko[sample].sum()
-                gene_cp = df_ko_predicted.loc[i][k]
-                if(tax_abundance>0 and gene_abund>0):
-                    tax_contri = ((tax_abundance*gene_cp)/gene_abund)*100
-                else:
-                    tax_contri = 0
-                # write in file
-                fh.write(bytes('\t'.join([tax,gene,sample,str(tax_abundance),str(gene_abund),str(tax_abundance_rel),str(gene_abund_rel),str(gene_cp),str(tax_contri)]).strip(),'utf-8'))
+    # subset dataframes
+    df_ko_predicted = df_ko_predicted[df_ko.index]
+    # calculate contribution
+    for taxon in df_ko_predicted.index:
+        for sample in df_abund.columns:
+            taxon_abund = df_abund.loc[taxon][sample]
+            taxon_abund_rel = (taxon_abund/df_abund[sample].sum())*100
+            ko_contrib = df_ko_predicted.loc[taxon]*taxon_abund
+            ko_contrib_rel = (ko_contrib/df_ko[sample])*100
+            ko_abund = df_ko[sample]
+            ko_abund_rel = (ko_abund/ko_abund.sum())*100
+            gene_cp = df_ko_predicted.loc[taxon]
+            # write in file
+            for k in ko_contrib.index:
+                fh.write(bytes('\t'.join([taxon,k,sample,str(taxon_abund),str(ko_abund[k]),str(taxon_abund_rel),str(ko_abund_rel[k]),str(gene_cp[k]),str(ko_contrib[k]),str(ko_contrib_rel[k])]).strip(),'utf-8'))
                 fh.write(bytes('\n','utf-8'))
 
 def calculateDescriptContribution(df_abund,df_ko_predicted,df_ko,tax_contrib_file,annotation_file,fh):
-    df_tax_contri = pd.read_csv(tax_contrib_file,sep='\t',compression='gzip')
+    fh.write(bytes('\t'.join(['taxon','level','sample','taxon_abund','level_abund','taxon_rel_abun','level_rel_abund','taxon_contribution','taxon_contribution_rel']).strip(),'utf-8'))
+    fh.write(bytes('\n','utf-8'))
+    # prepare files
     df_annotations = pd.read_csv(annotation_file,sep='\t',index_col=0)
     df_annotations = df_annotations[df_annotations.columns.difference(['A', 'B', 'EC', 'Pathway_Module'])]
     df_ko_predicted = df_ko_predicted.transpose().join(df_annotations)
     df_ko_predicted = df_ko_predicted.groupby('C').sum().transpose()
     df_ko = df_ko.groupby('C').sum()
-
-    fh.write(bytes('\t'.join(['taxon','level','sample','taxon_abund','level_abund','taxon_rel_abun','level_rel_abund','taxon_contribution']).strip(),'utf-8'))
-    fh.write(bytes('\n','utf-8'))
-    for c in df_abund.columns:
-        for i in df_abund.index:
-            tax = i
-            sample = c
-            tax_abundance = (df_abund.loc[i][sample])
-            tax_abundance_rel = tax_abundance/df_abund[sample].sum()
-            for level in set(df_ko_predicted.columns).intersection(df_ko.index):
-                level_abund = df_ko.loc[level][sample]
-                level_abund_rel = level_abund/df_ko[sample].sum()
-                level_cp = df_ko_predicted.loc[i][level]
-                if(tax_abundance > 0 and level_abund > 0):
-                    tax_contri = ((tax_abundance*level_cp)/level_abund)*100
-                else:
-                    tax_contri = 0
-                fh.write(bytes('\t'.join([str(tax),str(level),str(sample),str(tax_abundance),str(level_abund),str(tax_abundance_rel),str(level_abund_rel),str(tax_contri)]).strip(),'utf-8'))
+    df_ko_predicted = df_ko_predicted[df_ko.index]
+    # calculation
+    for taxon in df_ko_predicted.index:
+        for sample in df_abund.columns:
+            taxon_abund = df_abund.loc[taxon][sample]
+            taxon_abund_rel = (taxon_abund/df_abund[sample].sum())*100
+            ko_contrib = df_ko_predicted.loc[taxon]*taxon_abund
+            ko_contrib_rel = (ko_contrib/df_ko[sample])*100
+            ko_abund = df_ko[sample]
+            ko_abund_rel = (ko_abund/ko_abund.sum())*100
+            gene_cp = df_ko_predicted.loc[taxon]
+            # write in file
+            for k in ko_contrib.index:
+                fh.write(bytes('\t'.join([taxon,k,sample,str(taxon_abund),str(ko_abund[k]),str(taxon_abund_rel),str(ko_abund_rel[k]),str(ko_contrib[k]),str(ko_contrib_rel[k])]).strip(),'utf-8'))
                 fh.write(bytes('\n','utf-8'))
-                

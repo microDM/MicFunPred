@@ -279,6 +279,30 @@ final_df = fp.addAnnotations(final_df, os.path.join(otherPath,'TIGRFAMs_9.0_INFO
 final_df.to_csv(os.path.join(cwd,'TIGRFAM_metagenome','TIGRFAM_metagenome_with_description.tsv.gz'), sep="\t", compression='gzip')
 del final_df
 
+# CAZy prediction
+# 1. Predict gene copy numbers
+if(in_verbose):
+    print('Predicting CAZymes copy numbers')
+copyNumberTable_gene = pd.read_parquet(os.path.join(dbPath,'cazy.parq'))
+copyNumberTable_gene_consolidated = fp.makeKOTable(copyNumberTable_gene, abundTable, in_coreperc).fillna(0)
+del copyNumberTable_gene
+copyNumberTable_gene_consolidated.to_csv(os.path.join(cwd,'predicted_CAZymes.tsv.gz'), sep="\t", compression='gzip')
+# 2. Multiplication
+final_df = abundTable.transpose().dot(copyNumberTable_gene_consolidated).transpose().round()
+final_df = final_df.loc[final_df.sum(axis=1) != 0]
+os.mkdir(os.path.join(cwd,'CAZymes_metagenome'))
+final_df.to_csv(os.path.join(cwd,'CAZymes_metagenome','CAZymes_metagenome.tsv.gz'), sep="\t", compression='gzip')
+# 3. Contribution to genes
+if(in_contrib):
+    fh = gzip.open(os.path.join(cwd,'CAZymes_metagenome','CAZymes_taxon_contrib.tsv.gz'),'w')
+    fp.calculateGeneContribution(abundTable,copyNumberTable_gene_consolidated,final_df,fh)
+    fh.close()
+del copyNumberTable_gene_consolidated
+# 4. Add description
+final_df = fp.addAnnotations(final_df, os.path.join(otherPath,'CAZy_annot.txt'))
+final_df.to_csv(os.path.join(cwd,'CAZymes_metagenome','CAZymes_metagenome_with_description.tsv.gz'), sep="\t", compression='gzip')
+#del final_df
+
 timeTaken = round(time.time() - start_time, 2)
 print("Completed pipline in " + str(timeTaken) + " seconds.")
 

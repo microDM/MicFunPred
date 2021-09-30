@@ -130,7 +130,7 @@ def addAnnotations(metagenomeDf,keggFile):
 
     """
     # read kegg annotations
-    kodf = pd.read_csv(keggFile, sep="\t", index_col=0,engine='python')
+    kodf = pd.read_csv(keggFile, sep="\t", index_col=0,engine='python',encoding='windows-1252')
     metagenomeDf = metagenomeDf.join(kodf)
     return metagenomeDf
 

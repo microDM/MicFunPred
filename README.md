@@ -182,4 +182,4 @@ The output directory will have following files:
 This plot is generated using [Python plotly==4.9.0](https://plotly.com/python/). Different pathways can be browse using dropdown button and plots can be saved in '.png' format.
 
 ### Acknowlegments
-We would like to thanks Department of Biotechnology, Government of India and National Centre for Cell Science, Pune for funding and support. We also like to thanks contributors [Nikeeta Chavan](https://github.com/nikeetaC), [Nitin Narwade](https://github.com/nitinnarwade) and [Dhiraj Dhotre](https://www.linkedin.com/in/dhiraj-dhotre-36ab7a75/) 
+We would like to thanks Department of Biotechnology, Government of India and National Centre for Cell Science, Pune for funding and support. We would also like to thank contributors [Nikeeta Chavan](https://github.com/nikeetaC), [Nitin Narwade](https://github.com/nitinnarwade) and [Dhiraj Dhotre](https://www.linkedin.com/in/dhiraj-dhotre-36ab7a75/) 

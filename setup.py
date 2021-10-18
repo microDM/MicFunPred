@@ -6,7 +6,7 @@ import os
 
 __copyright__ = "Copyright 2018-2019, ProBioPred"
 __license__ = "PyPA"
-__version__ = "0.0.1"
+__version__ = "1.0.0"
 __maintainer__ = "Dattatray Mongad"
 
 long_description = ("MicFunPred prediction tool")

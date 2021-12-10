@@ -110,7 +110,7 @@ abundTable.to_csv(os.path.join(cwd,'tax_abund.table'), sep="\t")
 if (in_verbose):
     print("Predicting 16S rRNA copy numbers")
 # read 16S rRNA copy number table
-copyNumberTable_16S = pd.concat([pd.read_csv(x,sep='\t',index_col=0) for x in [os.path.join(dbPath,x) for x in os.listdir(dbPath) if('16S_cp' in x)]],sort=False)
+copyNumberTable_16S = pd.concat([pd.read_csv(x,sep='\t',index_col=0) for x in [os.path.join(dbPath,x) for x in os.listdir(dbPath) if('16S_cp' in x)]])
 copyNumberTable_16S_consolidated = fp.makeTable16S(copyNumberTable_16S, "mean", list(abundTable.index))
 copyNumberTable_16S_consolidated.to_csv(os.path.join(cwd,'predicted_16S_copy_numbers.txt'), sep="\t", header=None)
 

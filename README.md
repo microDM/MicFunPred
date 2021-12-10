@@ -1,4 +1,4 @@
-[<p align="center"><img src="logo.jpeg" width=500 height=130></p>](http://210.212.161.138/MicFunPred/)
+[<p align="center"><img src="logo.jpeg" width=500 height=130></p>](http://micfunpred.microdm.net.in/)
 
 ### Webserver: [micfunpred.microdm.net.in](http://micfunpred.microdm.net.in/)
 

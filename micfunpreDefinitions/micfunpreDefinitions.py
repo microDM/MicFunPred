@@ -160,23 +160,23 @@ def runMinPath(metagenomeDf,funpredPath,outPath,typeOfPrediction):
     """
     #make input for minPath and run MinPath
     if(typeOfPrediction == "kegg"):
-        with open(os.path.join(outPath,'minpath_in.ko'),"w") as f:
-            for i,j in enumerate(list(metagenomeDf.index)):
-                    f.write(str(i) + "\t" + str(j)+"\n")
-        if(sys.platform == 'linux'):
-            cmd = "python3 " + os.path.join(funpredPath,'MinPath1.4_micfunpred.py') + " " + funpredPath + " " + outPath + " -ko " + os.path.join(outPath,'minpath_in.ko') + " -report " + os.path.join(outPath,'minpath.out')
-        elif(sys.platform == 'win32'):
-            cmd = "python.exe " + os.path.join(funpredPath,'MinPath1.4_micfunpred.py') + " " + funpredPath + " " + outPath + " -ko " + os.path.join(outPath,'minpath_in.ko') + " -report " + os.path.join(outPath,'minpath.out')
-        a = os.popen(cmd).read()
-        minPathOutDF = pd.read_csv(os.path.join(outPath,'minpath.out'), sep="\t", index_col=0, header=None)
-        predictedMaps = ["ko" + x.replace("path ", "") for x in
-                         list(minPathOutDF[minPathOutDF[3] == "minpath 1"].index)]
-        temp = pd.DataFrame()
-        for i in predictedMaps:
-            temp = temp.append(metagenomeDf[metagenomeDf["C"].str.contains(i, na=False)])
-        temp.to_csv(os.path.join(outPath,'KO_metagenome_minPath_pruned.txt'), sep="\t")
-        #os.remove(outPath + "/temp.ko")
-        return temp
+        minpathOutFiles = []
+        for sampleName in metagenomeDf.columns:
+            minPtahInFile = os.path.join(outPath,sampleName + '_minpath_in.txt')
+            minpathOutFiles.append(os.path.join(outPath,sampleName + '_minpath.out.details'))
+            #create input file and run MinPath
+            minPtahInFile_fh = open(minPtahInFile,"w")
+            minPtahInFile_fh.writelines([str(i) + "\t" + str(j) + "\n" for i,j in enumerate(list(metagenomeDf[metagenomeDf[sampleName]>0].index))])
+            if(sys.platform == 'linux'):
+                cmd = "python3 " + os.path.join(funpredPath,'MinPath1.4_micfunpred.py') + " " + funpredPath + " " + outPath + " -ko " + minPtahInFile + " -report " + os.path.join(outPath,sampleName + '_minpath.out') + " -details " + os.path.join(outPath,sampleName + '_minpath.out.details')
+            elif(sys.platform == 'win32'):
+                cmd = "python.exe " + os.path.join(funpredPath,'MinPath1.4_micfunpred.py') + " " + funpredPath + " " + outPath + " -ko " + minPtahInFile + " -report " + os.path.join(outPath,sampleName + '_minpath.out') + " -details " + os.path.join(outPath,sampleName + '_minpath.out.details')
+            a = os.popen(cmd).read()
+        #create pathway abundance dataframe from all files
+        metagenomeDf_reindexed = metagenomeDf.copy()
+        pathDict = {}
+
+
     elif(typeOfPrediction == "metacyc"):
         minpathOutFiles = []
         for sampleName in metagenomeDf.columns:

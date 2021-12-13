@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/home/dattatraymongad/miniconda3/bin/python
 
 '''
 Created on 22-Feb-2019
@@ -135,40 +135,40 @@ final_df = abundTable.transpose().dot(copyNumberTable_gene_consolidated).transpo
 final_df = final_df.loc[final_df.sum(axis=1) != 0]
 os.mkdir(os.path.join(cwd,'KO_metagenome'))
 final_df.to_csv(os.path.join(cwd,'KO_metagenome','KO_metagenome.tsv.gz'), sep="\t",compression='gzip')
-# 3. Contribution to genes
+# 3. MinPath
+if (in_verbose):
+    print("Running MinPath (KO)")
+os.mkdir(os.path.join(cwd,'KO_metagenome','minPath_files'))
+final_df_gene, final_df_pathway = fp.runMinPath(final_df, funpredPath, os.path.join(cwd,'KO_metagenome','minPath_files'), "kegg")
+final_df_gene.to_csv(os.path.join(cwd,'KO_metagenome','KO_metagenome_MinPath_prunned.tsv.gz'), sep="\t",compression='gzip')
+final_df_pathway.to_csv(os.path.join(cwd,'KO_metagenome','KEGG_pathways_MinPath_prunned.tsv.gz'), sep="\t",compression='gzip')
+# 4. Contribution to genes
 if(in_contrib):
     # gene
     fh = gzip.open(os.path.join(cwd,'KO_metagenome','KO_taxon_contrib.tsv.gz'),'w')
-    fp.calculateGeneContribution(abundTable,copyNumberTable_gene_consolidated,final_df,fh)
+    fp.calculateGeneContribution(abundTable,copyNumberTable_gene_consolidated,final_df_gene,fh)
     fh.close()
-
-# 4. Add description
+# 5. Add description
 if (in_verbose):
     print("Anotating predicted metagenome")
-final_df = fp.addAnnotations(final_df, os.path.join(otherPath,'ko00001.txt'))
-final_df.to_csv(os.path.join(cwd,'KO_metagenome','KO_metagenome_with_description.tsv.gz'), sep="\t",compression='gzip')
-# 5. Contribution to pathways
+final_df_gene = fp.addAnnotations(final_df_gene, os.path.join(otherPath,'ko00001.txt'))
+final_df_gene.to_csv(os.path.join(cwd,'KO_metagenome','KO_metagenome_MinPath_prunned_with_description.tsv.gz'), sep="\t",compression='gzip')
+# 6. Contribution to pathways
 if(in_contrib):
-    fh = gzip.open(os.path.join(cwd,'KO_metagenome','KO_level_taxon_contrib.tsv.gz'),'w')
-    fp.calculateDescriptContribution(abundTable,copyNumberTable_gene_consolidated,final_df,os.path.join(cwd,'KO_metagenome','KO_taxon_contrib.tsv.gz'),os.path.join(otherPath,'ko00001.txt'),fh)
+    fh = gzip.open(os.path.join(cwd,'KO_metagenome','KO_pathway_taxon_contrib.tsv.gz'),'w')
+    fp.calculateDescriptContribution(abundTable,copyNumberTable_gene_consolidated,final_df_gene,os.path.join(cwd,'KO_metagenome','KO_taxon_contrib.tsv.gz'),os.path.join(otherPath,'ko00001.txt'),fh)
     fh.close()
     if(in_plot):
         fig = plt.plotDescription(os.path.join(cwd,'KO_metagenome','KO_level_taxon_contrib.tsv.gz'))
         fig.write_html(os.path.join(cwd,'KO_metagenome','KO_level_taxon_contrib.html'))
         del fig
 
-del copyNumberTable_gene_consolidated
-
-# 6. MinPath
-if (in_verbose):
-    print("Running MinPath (KO)")
-final_df = fp.runMinPath(final_df, funpredPath, os.path.join(cwd,'KO_metagenome'), "kegg")
 # 7. Groupby levels
-fp.summarizeByFun(final_df, "A").to_csv(os.path.join(cwd,'KO_metagenome','summarized_by_A.tsv.gz'), sep="\t",compression='gzip')
-fp.summarizeByFun(final_df, "B").to_csv(os.path.join(cwd,'KO_metagenome','summarized_by_B.tsv.gz'), sep="\t",compression='gzip')
-fp.summarizeByFun(final_df, "C").to_csv(os.path.join(cwd,'KO_metagenome','summarized_by_C.tsv.gz'), sep="\t",compression='gzip')
-fp.summarizeByFun(final_df, "Pathway_Module").to_csv(os.path.join(cwd,'KO_metagenome','summarized_by_Pathway_Module.tsv.gz'),sep="\t",compression='gzip')
-del final_df
+fp.summarizeByFun(final_df_gene, "A").to_csv(os.path.join(cwd,'KO_metagenome','summarized_by_A.tsv.gz'), sep="\t",compression='gzip')
+fp.summarizeByFun(final_df_gene, "B").to_csv(os.path.join(cwd,'KO_metagenome','summarized_by_B.tsv.gz'), sep="\t",compression='gzip')
+fp.summarizeByFun(final_df_gene, "C").to_csv(os.path.join(cwd,'KO_metagenome','summarized_by_C.tsv.gz'), sep="\t",compression='gzip')
+fp.summarizeByFun(final_df_gene, "Pathway_Module").to_csv(os.path.join(cwd,'KO_metagenome','summarized_by_Pathway_Module.tsv.gz'),sep="\t",compression='gzip')
+del final_df_gene
 
 # EC prediction
 # 1. Predict gene copy numbers
@@ -197,15 +197,16 @@ if (in_verbose):
 final_df = fp.ec2RXN(final_df, os.path.join(otherPath,'ec2rxn_new'))
 final_df.to_csv(os.path.join(cwd,'MetaCyc_metagenome','RXN_metagenome.tsv.gz'), sep="\t", compression='gzip')
 os.mkdir(os.path.join(cwd,'MetaCyc_metagenome','minPath_files'))
-final_df = fp.runMinPath(final_df, funpredPath, os.path.join(cwd,'MetaCyc_metagenome','minPath_files'),
+final_df_gene, final_df_pathway = fp.runMinPath(final_df, funpredPath, os.path.join(cwd,'MetaCyc_metagenome','minPath_files'),
                                           "metacyc")
-final_df.to_csv(os.path.join(cwd,'MetaCyc_metagenome','PathwayAbundance.tsv.gz'), sep="\t", compression='gzip')
+final_df_gene.to_csv(os.path.join(cwd,'MetaCyc_metagenome','RXN_metagenome_MinPath_prunned.tsv.gz'), sep="\t", compression='gzip')
+final_df_pathway.to_csv(os.path.join(cwd,'MetaCyc_metagenome','PathwayAbundance.tsv.gz'), sep="\t", compression='gzip')
 # 5. Groupby levels
-final_df = fp.addMetaCycPathwayName(final_df, os.path.join(otherPath,'path_to_Name.txt'))
-final_df.to_csv(os.path.join(cwd,'MetaCyc_metagenome','PathwayAbundance_with_names.tsv.gz'), sep="\t",compression='gzip')
-fp.summarizeByFun(final_df, "Type").to_csv(
+final_df_pathway = fp.addMetaCycPathwayName(final_df_pathway, os.path.join(otherPath,'path_to_Name.txt'))
+final_df_pathway.to_csv(os.path.join(cwd,'MetaCyc_metagenome','PathwayAbundance_with_names.tsv.gz'), sep="\t",compression='gzip')
+fp.summarizeByFun(final_df_pathway, "Type").to_csv(
     os.path.join(cwd,'MetaCyc_metagenome','Pathway_summarize_by_Types.tsv.gz'), sep="\t", compression='gzip')
-del final_df
+del final_df_pathway
 
 # Pfam prediction
 # 1. Predict gene copy numbers

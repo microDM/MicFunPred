@@ -130,7 +130,7 @@ def addAnnotations(metagenomeDf,keggFile):
 
     """
     # read kegg annotations
-    kodf = pd.read_csv(keggFile, sep="\t", index_col=0,engine='python',encoding='windows-1252')
+    kodf = pd.read_csv(keggFile, sep="\t", index_col=0,engine='python')
     metagenomeDf = metagenomeDf.join(kodf)
     return metagenomeDf
 
@@ -161,7 +161,7 @@ def runMinPath(metagenomeDf,funpredPath,outPath,typeOfPrediction):
     #make input for minPath and run MinPath
     if(typeOfPrediction == "kegg"):
         minpathOutFiles = []
-        for sampleName in metagenomeDf.columns:
+        for sampleName in metagenomeDf.columns.difference(['Pathway_Module','A','B','C','EC']):
             minPtahInFile = os.path.join(outPath,sampleName + '_minpath_in.txt')
             minpathOutFiles.append(os.path.join(outPath,sampleName + '_minpath.out.details'))
             #create input file and run MinPath
@@ -174,9 +174,39 @@ def runMinPath(metagenomeDf,funpredPath,outPath,typeOfPrediction):
             a = os.popen(cmd).read()
         #create pathway abundance dataframe from all files
         metagenomeDf_reindexed = metagenomeDf.copy()
-        pathDict = {}
-
-
+        metagenome_daraframes = []
+        sampleName_list = []
+        annotation_dataframe = pd.DataFrame(columns=['KO','Pathway'])
+        for minpath_out in minpathOutFiles:
+            kos_present = []
+            sampleName = os.path.basename(minpath_out).split('_minpath')[0]
+            sampleName_list.append(sampleName)
+            # read KOs present as per minpath
+            iFH = open(minpath_out,"r")
+            for line in iFH.readlines():
+                # pathways
+                matchObj = re.match("^path.*\#\s(.*)",line)
+                if(matchObj):
+                    pathway = matchObj.group(1)
+                # KOs
+                matchObj = re.search("(K\d+)",line)
+                if(matchObj):
+                    ko = matchObj.group(1)
+                    # create a lsit of KOs present and annotation dataframe
+                    kos_present.append(ko)
+                    annotation_dataframe = annotation_dataframe.append({'KO':ko,'Pathway':pathway},ignore_index=True)
+            kos_present = set(kos_present)
+            # append dataframe to dataframe list
+            df_temp = metagenomeDf_reindexed.loc[kos_present][sampleName]
+            metagenome_daraframes.append(df_temp)
+        # merge all dataframes
+        df_kos = pd.concat(metagenome_daraframes,axis=1).fillna(0)
+        # add annotation
+        annotation_dataframe = annotation_dataframe.drop_duplicates()
+        df_kos_annotated = pd.merge(df_kos,annotation_dataframe,left_index=True,right_on='KO')
+        df_pathway = df_kos_annotated.drop(['KO'],axis=1).groupby('Pathway').sum()
+        return df_kos, df_pathway
+    # MetaCyc
     elif(typeOfPrediction == "metacyc"):
         minpathOutFiles = []
         for sampleName in metagenomeDf.columns:
@@ -193,24 +223,38 @@ def runMinPath(metagenomeDf,funpredPath,outPath,typeOfPrediction):
             a = os.popen(cmd).read()
         #create pathway abundance dataframe from all files
         metagenomeDf_reindexed = metagenomeDf.copy()
-        pathDict = {}
-        for i in minpathOutFiles:
-            path = ""
-            rxn = ""
-            iFH = open(i,"r")
+        metagenome_daraframes = []
+        sampleName_list = []
+        annotation_dataframe = pd.DataFrame(columns=['RXN','Pathway'])
+        for minpath_out in minpathOutFiles:
+            kos_present = []
+            sampleName = os.path.basename(minpath_out).split('_minpath')[0]
+            sampleName_list.append(sampleName)
+            # read KOs present as per minpath
+            iFH = open(minpath_out,"r")
             for line in iFH.readlines():
-                matchObj = re.match("^path.*\#\s(\S+)",line)
+                # pathways
+                matchObj = re.match("^path.*\#\s(.*)",line)
                 if(matchObj):
-                    path = matchObj.group(1)
-                matchObj = re.match("^\s+(\S+)",line)
+                    pathway = matchObj.group(1)
+                # KOs
+                matchObj = re.search("^\s+(\S+)",line)
                 if(matchObj):
-                    rxn = matchObj.group(1)
-                    pathDict[rxn] = path
-            iFH.close()
-        # select rows having RXN found
-        metagenomeDf_reindexed = metagenomeDf_reindexed.loc[list(pathDict.keys())]
-        metagenomeDf_reindexed.index = metagenomeDf_reindexed.index.to_series().replace(pathDict)
-        return metagenomeDf_reindexed.groupby(metagenomeDf_reindexed.index).sum()
+                    ko = matchObj.group(1)
+                    # create a lsit of KOs present and annotation dataframe
+                    kos_present.append(ko)
+                    annotation_dataframe = annotation_dataframe.append({'RXN':ko,'Pathway':pathway},ignore_index=True)
+            kos_present = set(kos_present)
+            # append dataframe to dataframe list
+            df_temp = metagenomeDf_reindexed.loc[kos_present][sampleName]
+            metagenome_daraframes.append(df_temp)
+        # merge all dataframes
+        df_kos = pd.concat(metagenome_daraframes,axis=1).fillna(0)
+        # add annotation
+        annotation_dataframe = annotation_dataframe.drop_duplicates()
+        df_kos_annotated = pd.merge(df_kos,annotation_dataframe,left_index=True,right_on='RXN')
+        df_pathway = df_kos_annotated.drop(['RXN'],axis=1).groupby('Pathway').sum()
+        return df_kos, df_pathway
     
 def ec2RXN(df,ec2rxnFile):
     """

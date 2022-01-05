@@ -144,7 +144,7 @@ def summarizeByFun(metagenomeDf,group):
     Returns: Consolidated DataFrame
 
     """
-    return metagenomeDf.groupby(group).sum()
+    return metagenomeDf.groupby(group).mean()
 
 def runMinPath(metagenomeDf,funpredPath,outPath,typeOfPrediction):
     """
@@ -253,7 +253,7 @@ def runMinPath(metagenomeDf,funpredPath,outPath,typeOfPrediction):
         # add annotation
         annotation_dataframe = annotation_dataframe.drop_duplicates()
         df_kos_annotated = pd.merge(df_kos,annotation_dataframe,left_index=True,right_on='RXN')
-        df_pathway = df_kos_annotated.drop(['RXN'],axis=1).groupby('Pathway').sum()
+        df_pathway = df_kos_annotated.drop(['RXN'],axis=1).groupby('Pathway').mean()
         return df_kos, df_pathway
     
 def ec2RXN(df,ec2rxnFile):

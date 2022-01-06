@@ -34,7 +34,7 @@ minpath = sys.argv[1]
 userInputDir = sys.argv[2]
 os.chdir(userInputDir)
 
-keggPath0, seedPath0, mapPath0, glpsol0 = minpath + "/data/other/", minpath + "/data/other/", minpath + "/data/other/", "/usr/bin/glpsol"
+keggPath0, seedPath0, mapPath0, glpsol0 = minpath + "/data/other/", minpath + "/data/other/", minpath + "/data/other/", "glpsol"
 
 def intmatrix(dim1, dim2):
     mat = []

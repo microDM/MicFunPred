@@ -34,7 +34,7 @@ def blast(query,db,in_numCores,cwd):
     Returns:
         None
     """
-    if(sys.platform == 'linux'):
+    if(sys.platform in ['darwin','linux','cygwin']):
         cmd = "blastn -out " + os.path.join(cwd,"out.blast") + " -outfmt 6 -query " + query + " -db " + db + " -num_threads " + in_numCores + " -max_target_seqs 1"
     elif(sys.platform == 'win32'):
         cmd = "blastn.exe -out " + os.path.join(cwd,"out.blast") + " -outfmt 6 -query " + query + " -db " + db + " -num_threads " + in_numCores + " -max_target_seqs 1"

@@ -167,7 +167,7 @@ def runMinPath(metagenomeDf,funpredPath,outPath,typeOfPrediction):
             #create input file and run MinPath
             minPtahInFile_fh = open(minPtahInFile,"w")
             minPtahInFile_fh.writelines([str(i) + "\t" + str(j) + "\n" for i,j in enumerate(list(metagenomeDf[metagenomeDf[sampleName]>0].index))])
-            if(sys.platform == 'linux'):
+            if(sys.platform in ['darwin','linux','cygwin']):
                 cmd = "python3 " + os.path.join(funpredPath,'MinPath1.4_micfunpred.py') + " " + funpredPath + " " + outPath + " -ko " + minPtahInFile + " -report " + os.path.join(outPath,sampleName + '_minpath.out') + " -details " + os.path.join(outPath,sampleName + '_minpath.out.details')
             elif(sys.platform == 'win32'):
                 cmd = "python.exe " + os.path.join(funpredPath,'MinPath1.4_micfunpred.py') + " " + funpredPath + " " + outPath + " -ko " + minPtahInFile + " -report " + os.path.join(outPath,sampleName + '_minpath.out') + " -details " + os.path.join(outPath,sampleName + '_minpath.out.details')
@@ -216,7 +216,7 @@ def runMinPath(metagenomeDf,funpredPath,outPath,typeOfPrediction):
             #create input file and run MinPath
             minPtahInFile_fh = open(minPtahInFile,"w")
             minPtahInFile_fh.writelines(['read' + str(i) + "\t" + str(j) + "\n" for i,j in enumerate(list(metagenomeDf[metagenomeDf[sampleName]>0].index))])
-            if(sys.platform == 'linux'):
+            if(sys.platform in ['darwin','linux','cygwin']):
                 cmd = "python3 " + os.path.join(funpredPath,'MinPath1.4_micfunpred.py') + ' ' + funpredPath + " " + outPath + " -any " + minPtahInFile + " -map " + os.path.join(funpredPath,'data','path_to_RXN.txt') + " -report " + os.path.join(outPath,sampleName + '_minpath.out') + " -details " + os.path.join(outPath,sampleName + '_minpath.out.details')
             elif(sys.platform == 'win32'):
                 cmd = "python3.exe " + os.path.join(funpredPath,'MinPath1.4_micfunpred.py') + ' ' + funpredPath + " " + outPath + " -any " + minPtahInFile + " -map " + os.path.join(funpredPath,'data','path_to_RXN.txt') + " -report " + os.path.join(outPath,sampleName + '_minpath.out') + " -details " + os.path.join(outPath,sampleName + '_minpath.out.details')

@@ -61,7 +61,20 @@ def selectBlastHits_assignGenus_subsetOtuTable(blastOut,otuTable,blastcutoff):
     if(df.empty):
         exit('None of OTU/ASV sequences passed the given percent identity cut-off')
     otuId_tax_dict = dict(zip(df.index,df[1].str.split("_",expand=True)[1]))
-    df = pd.read_csv(otuTable,sep="\t",index_col=0)
+    with open(otuTable) as f:
+        line = f.readline()
+        cnt = 0
+        prev_line = ''
+        while line.startswith('#'):
+            prev_line = line
+            line = f.readline()
+            cnt += 1
+    header = prev_line.strip().lstrip('# ').split()
+    if(len(header) >0):
+        header = header[1:]
+        df = pd.read_csv(otuTable,sep='\t',index_col=0,names=header,skiprows=cnt)
+    else:
+        df = pd.read_csv(otuTable,sep='\t',index_col=0)
     df.columns = df.columns.astype(str)
     df = df.reindex(list(otuId_tax_dict.keys()))
     df["taxonomy"] = list(otuId_tax_dict.values())

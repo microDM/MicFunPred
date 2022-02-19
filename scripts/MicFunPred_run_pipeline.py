@@ -33,6 +33,8 @@ optional_opts.add_argument("-p", "--perc_ident",type=float,
                   help="[Optional] Percent identity cut-off to assign genus. (default: 97)", default=98.3)
 optional_opts.add_argument("-b","--blastout",type=str,help="Blast output of ASV/OTU sequences with any database in output format 6",
                     default=None,metavar="PATH")
+optional_opts.add_argument("-d","--blast_db",type=str,help="Path to custom blast db to run blast with",
+                    default=None,metavar="PATH")
 optional_opts.add_argument("-c", "--genecov",type=str, default=0.5,
                   help="[Optional] Percentage of organism in a genus which should have gene to define it as core. Value ranges "
                        "from 0 to 1 (default: 0.5)")
@@ -61,6 +63,7 @@ else:
     in_coreperc = float(options.genecov)
     in_verbose = options.verbose
     in_blastout = options.blastout
+    in_blast_db = options.blast_db
     in_contrib = options.contrib
     in_plot = options.plot
 
@@ -95,7 +98,8 @@ start_time = time.time()
 if (in_verbose):
     print("Running BLAST with " + str(in_percIdentCutOff) + " cut-off.")
 if (in_blastout == None):
-    fp.blast(os.path.join(os.getcwd(),in_repSet), os.path.join(dbPath,'blastDB','16S_all'), in_numCores, cwd)
+    blastDbPath = in_blast_db is None ? os.path.join(dbPath,'blastDB','16S_all') : in_blast_db
+    fp.blast(os.path.join(os.getcwd(),in_repSet), blastDbPath, in_numCores, cwd)
     tax_dict, abundTable = fp.selectBlastHits_assignGenus_subsetOtuTable(os.path.join(cwd,'out.blast'), in_otuTab,in_percIdentCutOff)
 elif(in_blastout != None):
     #filter with pident cut-off
@@ -212,7 +216,7 @@ del final_df_pathway
 # 1. Predict gene copy numbers
 if (in_verbose):
     print("Predicting Pfam copy numbers")
-copyNumberTable_gene = pd.read_parquet(os.path.join(dbPath,'pfam.parq'))    
+copyNumberTable_gene = pd.read_parquet(os.path.join(dbPath,'pfam.parq'))
 copyNumberTable_gene_consolidated = fp.makeKOTable(copyNumberTable_gene, abundTable, in_coreperc).fillna(0)
 del copyNumberTable_gene
 copyNumberTable_gene_consolidated.to_csv(os.path.join(cwd,'predicted_Pfam.tsv.gz'), sep="\t", compression='gzip')
@@ -306,6 +310,3 @@ final_df.to_csv(os.path.join(cwd,'CAZymes_metagenome','CAZymes_metagenome_with_d
 
 timeTaken = round(time.time() - start_time, 2)
 print("Completed pipline in " + str(timeTaken) + " seconds.")
-
-
-

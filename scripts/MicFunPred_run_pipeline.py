@@ -256,7 +256,7 @@ if(in_contrib):
     fh.close()
 del copyNumberTable_gene_consolidated
 # 4. Add description
-final_df = fp.addAnnotations(final_df, os.path.join(otherPath,'cognames2003-2014.tab'))
+final_df = fp.addAnnotations(final_df, os.path.join(otherPath,'cog-20.def.tab'))
 final_df.to_csv(os.path.join(cwd,'COG_metagenome','COG_metagenome_with_description.tsv.gz'), sep="\t", compression='gzip')
 del final_df
 

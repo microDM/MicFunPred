@@ -500,7 +500,7 @@ COG0503	F	Adenine/guanine phosphoribosyltransferase or related PRPP-binding prot
 COG0504	F	CTP synthase (UTP-ammonia lyase)	PyrG	Pyrimidine biosynthesis		1S1M
 COG0505	EF	Carbamoylphosphate synthase small subunit	CarA	Arginine biosynthesis		1C30
 COG0506	E	Proline dehydrogenase	PutA	Proline degradation		5KF6
-COG0507	L	ATPase/5’-3’ helicase helicase subunit RecD of the DNA repair enzyme RecBCD (exonuclease V)	RecD		29901759;30601118	1W36
+COG0507	L	ATPase/5â€™-3â€™ helicase helicase subunit RecD of the DNA repair enzyme RecBCD (exonuclease V)	RecD		29901759;30601118	1W36
 COG0508	C	Pyruvate/2-oxoglutarate dehydrogenase complex, dihydrolipoamide acyltransferase (E2) component	AceF	Pyruvate oxidation		1B5S
 COG0509	E	Glycine cleavage system protein H (lipoate-binding)	GcvH	Glycine cleavage		1DXM
 COG0510	H	Thiamine kinase or a related kinase	CotS			3DXQ
@@ -919,7 +919,7 @@ COG1070	G	Sugar (pentulose or hexulose) kinase	XylB	Non-phosphorylated Entner-Do
 COG1071	C	TPP-dependent pyruvate or acetoin dehydrogenase subunit alpha	AcoA	Pyruvate oxidation		1DTW
 COG1072	H	Panthothenate kinase	CoaA	Pantothenate/CoA biosynthesis		2GA8
 COG1073	T	Fermentation-respiration switch esterase FrsA, DUF1100 family	FrsA			
-COG1074	L	3’-5’ helicase subunit RecB of the DNA repair enzyme RecBCD (exonuclease V)	RecB		29901759;30601118	3U44
+COG1074	L	3â€™-5â€™ helicase subunit RecB of the DNA repair enzyme RecBCD (exonuclease V)	RecB		29901759;30601118	3U44
 COG1075	I	Triacylglycerol esterase/lipase EstA, alpha/beta hydrolase fold	EstA			1I6W
 COG1076	O	DnaJ domain-containing protein	DjlA		15489435;11106641	
 COG1077	DZ	Cell shape-determining ATPase MreB, actin-like superfamily	MreB			1JCE
@@ -2116,7 +2116,7 @@ COG2311	S	Uncharacterized membrane protein YeiB	YeiB
 COG2312	Q	Erythromycin esterase homolog	YbfO			2QGM
 COG2313	F	Pseudouridine-5'-phosphate glycosidase (pseudoU degradation)	PsuG		18591240	1VKM
 COG2314	R	Uncharacterized membrane protein YozV, TM2 domain, contains pTyr	TM2		27148221	
-COG2315	K	Predicted DNA-binding protein with ‘double-wing’ structural motif, MmcQ/YjbR family	MmcQ		17266124	2A1V
+COG2315	K	Predicted DNA-binding protein with â€˜double-wingâ€™ structural motif, MmcQ/YjbR family	MmcQ		17266124	2A1V
 COG2316	R	Predicted hydrolase, HD superfamily				
 COG2317	O	Zn-dependent carboxypeptidase, M32 family	YpwA			1K9X
 COG2318	Q	Bacillithiol/mycothiol S-transferase BstA/DinB, DinB/YfiT family (unrelated to E. coli DinB)	DinB		22059487;24821014	2QE9

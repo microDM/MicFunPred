@@ -47,8 +47,6 @@ optional_opts.add_argument("-v", "--verbose", action="store_true", default=False
                   help="Print message of each step to stdout.")
 optional_opts.add_argument('--contrib',help='Calculate taxon contribution of functions',
                   action='store_true',   default=False)
-optional_opts.add_argument('--plot',help='Plot contribution for KEGG pathways',action='store_true',
-                default=False)
 
 # if required option does not provided exit
 options = parser.parse_args()
@@ -65,7 +63,7 @@ else:
     in_blastout = options.blastout
     in_blast_db = options.blast_db
     in_contrib = options.contrib
-    in_plot = options.plot
+    in_plot = False
 
 ###########################################        MAIN         ######################33
 

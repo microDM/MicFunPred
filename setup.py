@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 from glob import glob
 import os
 
-__copyright__ = "Copyright 2018-2019, ProBioPred"
+__copyright__ = "Copyright 2018-2019, MicFunPred"
 __license__ = "PyPA"
 __version__ = "1.0.0"
 __maintainer__ = "Dattatray Mongad"

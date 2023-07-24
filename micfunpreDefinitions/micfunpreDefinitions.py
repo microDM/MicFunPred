@@ -119,19 +119,15 @@ def makeKOTable(df,abundData,coreNum):
     """
     # old
     taxonomyList = list(abundData.index)
-    dfToReturn = pd.DataFrame()
+    dfToReturn = dict()
     for tax in taxonomyList:
         temp_df = df[df.index.str.contains(tax,na=False)]
         n = round(temp_df.shape[0]*coreNum)
         temp_df = temp_df[temp_df.columns[temp_df.astype(bool).sum()>=n]]
         median_series = temp_df.mean()
-        median_series[median_series.between(0,1,False)] = 1
-        #median_df = pd.Series.to_frame(median_series).transpose().round()
-        median_df = pd.Series.to_frame(median_series).transpose()
-        dfToReturn = dfToReturn.append(median_df, ignore_index = True,sort=False)
-    dfToReturn.index = taxonomyList
-    #replace NA with 0
-    dfToReturn = dfToReturn.fillna(0)
+        #median_df = pd.Series.to_frame(median_series).transpose()
+        dfToReturn[tax] = median_series
+    dfToReturn=pd.DataFrame.from_dict(dfToReturn).transpose()
     return dfToReturn
 
 def addAnnotations(metagenomeDf,keggFile):
@@ -158,7 +154,7 @@ def summarizeByFun(metagenomeDf,group):
     Returns: Consolidated DataFrame
 
     """
-    return metagenomeDf.groupby(group).mean()
+    return metagenomeDf.groupby(group).sum()
 
 def runMinPath(metagenomeDf,funpredPath,outPath,typeOfPrediction):
     """
@@ -208,8 +204,9 @@ def runMinPath(metagenomeDf,funpredPath,outPath,typeOfPrediction):
                     ko = matchObj.group(1)
                     # create a lsit of KOs present and annotation dataframe
                     kos_present.append(ko)
-                    annotation_dataframe = annotation_dataframe.append({'KO':ko,'Pathway':pathway},ignore_index=True)
-            kos_present = set(kos_present)
+                    temp_annotation_dataframe = pd.DataFrame({'KO':ko,'Pathway':pathway},index=[0])
+                    annotation_dataframe = pd.concat([annotation_dataframe,temp_annotation_dataframe])
+            kos_present = list(set(kos_present))
             # append dataframe to dataframe list
             df_temp = metagenomeDf_reindexed.loc[kos_present][sampleName]
             metagenome_daraframes.append(df_temp)
@@ -257,8 +254,9 @@ def runMinPath(metagenomeDf,funpredPath,outPath,typeOfPrediction):
                     ko = matchObj.group(1)
                     # create a lsit of KOs present and annotation dataframe
                     kos_present.append(ko)
-                    annotation_dataframe = annotation_dataframe.append({'RXN':ko,'Pathway':pathway},ignore_index=True)
-            kos_present = set(kos_present)
+                    temp_annotation_dataframe = pd.DataFrame({'RXN':ko,'Pathway':pathway},index=[0])
+                    annotation_dataframe = pd.concat([annotation_dataframe,temp_annotation_dataframe])
+            kos_present = list(set(kos_present))
             # append dataframe to dataframe list
             df_temp = metagenomeDf_reindexed.loc[kos_present][sampleName]
             metagenome_daraframes.append(df_temp)

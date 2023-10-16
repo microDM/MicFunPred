@@ -1,0 +1,345 @@
+	copy_number
+candidate division SR1 bacterium taxon 345 1OR1 (unscreened)	2
+Jonquetella anthropi ADV 126, DSM 22815	3
+Peptoanaerobacter stomatis ACC19a	1
+Peptoanaerobacter stomatis CM5	1
+Johnsonella ignava ATCC 51276	1
+Synergistes sp. 3_1_syn1	1
+Anaeroglobus geminatus F0357	1
+Oribacterium asaccharolyticum ACB7	1
+Subdoligranulum sp. 4_3_54A2FAA	1
+Bilophila sp. 4_1_30	1
+Dorea formicigenerans 4_6_53AFAA	1
+Helcococcus kunzii ATCC 51366	2
+Facklamia languida CCUG 37842	3
+Coprobacillus sp. 8_2_54BFAA	1
+Coprobacillus sp. 3_3_56FAA	1
+candidate division SR1 bacterium taxon 345 1OR1 (unscreened)	0
+Peptostreptococcus anaerobius DSM 2949	4
+Eggerthia catenaformis OT 569, DSM 20559	6
+Alloscardovia omnicolens DSM 21503	2
+Inquilinus limosus DSM 16000	4
+Solobacterium moorei DSM 22971	3
+Helcococcus sueciensis DSM 17243	3
+Varibaculum cambriense DSM 15806	2
+Peptoanaerobacter stomatis OBRC8	0
+Oribacterium parvum ACB8	3
+Facklamia ignava CCUG 37419	2
+Facklamia hominis CCUG 36813	3
+Atopobium minutum 10063974	2
+Butyricicoccus pullicaecorum 1.2	4
+Afipia felis felis ATCC 53690	1
+Alloiococcus otitis ATCC 51267	2
+Afipia clevelandensis ATCC 49720	1
+Eggerthia catenaformis OT 569	8
+Peptostreptococcus anaerobius VPI 4330	1
+Facklamia hominis ACS-120-V-Sch10	2
+Atopobium sp. oral taxon 199 F0494	4
+Atopobium sp. oral Taxon 810 F0209	1
+Alloscardovia omnicolens F0580	1
+Hallella seregens ATCC 51272	2
+Facklamia sourekii ATCC 700629	4
+Coprobacillus cateniformis D6	4
+Fluoribacter dumoffii Tex-KL, ATCC 33343	2
+Dielma fastidiosa JC118	1
+Senegalimassilia anaerobia JC110	1
+Enorma massiliensis phI	1
+Timonella senegalensis JC301	1
+Kallipyga massiliensis ph2	2
+Holdemania massiliensis AP2	1
+Haematomicrobium sanguinis DSM 21259	1
+Cetobacterium somerae ATCC BAA-474	1
+Faecalitalea cylindroides ATCC 27803	0
+Atopobium sp. BS2	1
+Atopobium sp. ICM42b	1
+Shuttleworthia sp. MSX8B	1
+Balneatrix alpica DSM 16621	3
+Bilophila wadsworthia ATCC 49260	2
+Subdoligranulum variabile DSM 15176	3
+Marvinbryantia formatexigens I-52	1
+Atopobium vaginae DSM 15829	1
+Oribacterium parvum ACB1	4
+Peptoanaerobacter stomatis CM2	4
+Mitsuokella multacida DSM 20544	6
+Bilophila wadsworthia 3_1_6	4
+Coprococcus sp. ART55/1	1
+Mitsuokella sp. oral taxon 131 W9106	1
+Oribacterium sp. oral taxon 078 F0263	1
+Enorma timonensis GD5	1
+Lactonifactor longoviformis DSM 17459	3
+Intestinibacter bartlettii DSM 16795	3
+Marvinbryantia formatexigens I-52	3
+Pseudescherichia vulneris NBRC 102420	1
+Nosocomiicoccus massiliensis NP2	1
+Atopobium parvulum DNF00906	1
+Dolosicoccus paucivorans DSM 15742	2
+Peptococcus niger DSM 20475	4
+Ignavigranum ruoffiae DSM 15695	4
+Coprobacillus sp. 8_1_38FAA	9
+Dorea sp. D27	4
+Numidum massiliense mt3	3
+Globicatella sanguinis NBRC 15551	1
+Desmospora activa DSM 45169	2
+Eisenbergiella tayi NML 150140-1	2
+Eisenbergiella tayi NML 110678	3
+Eisenbergiella tayi NML 120147	1
+Eisenbergiella tayi NML 120146	1
+Eisenbergiella tayi NML 140904	1
+Eisenbergiella tayi NML 110608	1
+Eisenbergiella tayi NML 120489	1
+Victivallis vadensis DSM 14823	1
+Agathobaculum butyriciproducens DSM 100391	6
+Butyricicoccus sp. K4410.MGS-46	2
+Dielma fastidiosa DSM 26099	1
+Pseudochrobactrum asaccharolyticum DSM 25619	1
+Pseudocitrobacter faecalis DSM 27453	1
+Morococcus cerebrosus 480_NMEN	3
+Morococcus cerebrosus 379_NMEN	2
+Morococcus cerebrosus 378_NMEN	1
+Morococcus cerebrosus 313_NMEN	1
+Franconibacter helveticus 413_SENT	2
+Alloscardovia omnicolens 1173_BLON	4
+Alloscardovia omnicolens 1036_GVAG	1
+Alloscardovia omnicolens 842_GVAG	1
+Alloscardovia omnicolens 476_GVAG	5
+Alloscardovia omnicolens 350_GVAG	4
+Fenollaria timonensis GD5	3
+Desmospora activa DSM 45169	1
+Hazenella coriacea DSM 45707	7
+Faecalimonas umbilicata DSM 103426	1
+Hazenella coriacea DSM 45707	12
+Victivallales bacterium CCUG 44730	4
+Rappaport israeli B08008	1
+Fournierella massiliensis DSM 100451	2
+Tetzosporium hominis VT-49	9
+Fusicatenibacter saccharivorans 2789STDY5834885	2
+Fusicatenibacter saccharivorans 2789STDY5834923	4
+Fusicatenibacter sp. 2789STDY5834925	1
+Fusicatenibacter saccharivorans 2789STDY5608849	2
+Merdimonas faecis BR31	4
+Catabacter honkongensis DSM 18959	1
+Anaerospora hongkongensis DSM 15969	3
+Coprococcus comes 2789STDY5834913	3
+Coprococcus comes 2789STDY5834866	2
+Coprococcus eutactus 2789STDY5834963	3
+Coprococcus eutactus 2789STDY5608888	2
+Coprococcus comes 2789STDY5834962	1
+Catenibacterium mitsuokai 2789STDY5608825	3
+Mitsuokella jalaludinii 2789SDY5608828	3
+Coprococcus eutactus 2789STDY5608829	1
+Coprococcus comes 2789STDY5608832	1
+Coprococcus eutactus 2789STDY5608843	1
+Nosocomiicoccus ampullae LUREC	5
+Facklamia ignava UMB0898	5
+Anaerotruncus colihominis 2789STDY5834939	1
+Dorea longicatena 2789STDY5834867	9
+Faecalicatena contorta 2789STDY5834876	2
+Dorea longicatena 2789STDY5834914	1
+Dorea longicatena 2789STDY5834961	2
+Dorea longicatena 2789STDY5608866	0
+Dorea longicatena 2789STDY5608851	3
+Nosocomiicoccus massiliensis UMB0959	4
+Pseudoglutamicibacter albus UMB0722	3
+Dolosicoccus paucivorans UMB0860	2
+Globicatella sanguinis UMB0514	4
+Dolosicoccus paucivorans UMB0852	1
+Facklamia hominis UMB0111	1
+Intestinibacter bartlettii 2789STDY5834879	2
+Varibaculum cambriense UMB0796	1
+Varibaculum cambriense UMB0744	1
+Atopobium vaginae NCTC 13935	2
+Propioniferax innocua DSM 8251	1
+Alloscardovia omnicolens UMB0064	1
+Alloscardovia omnicolens UMB0006	0
+Helcobacillus massiliensis DSM 23040	0
+Canibacter oris DSM 27064	3
+Wohlfahrtiimonas sp. G9077	1
+Enteroscipio rubneri ResAG-96	1
+Rubneribacter badeniensis ResAG-85	1
+Ignatzschineria sp. F8392	1
+Holdemanella biformis AF10-31	1
+Anaerofustis stercorihominis AM25-6	1
+Absiella dolichum AF35-6BH	1
+Bergeriella denitrificans R981	1
+Harryflintia acetispora AM01-30	1
+Emergencia timonensis AM07-24	1
+Wohlfahrtiimonas chitiniclastica ATCC 51249	1
+Lactonifactor longoviformis DSM 17459	1
+Holdemanella biformis AM42-13AC	1
+Lachnotalea sp. AF33-28	1
+Holdemanella biformis AF22-10AC	4
+Sellimonas intestinalis AF07-16	1
+Catenibacterium sp. AM22-6LB	1
+Holdemania filiformis AF24-29	1
+Subdoligranulum sp. AF14-43	1
+Pseudoglutamicibacter cumminsii IME1328	1
+Butyricicoccus sp. AM27-36	1
+Butyricicoccus sp. AM05-1	1
+Mitsuokella sp. AF33-22	1
+Butyricicoccus sp. AM28-25	1
+Mitsuokella sp. AF21-1AC	1
+Butyricicoccus sp. OM06-6AC	1
+Agathobaculum butyriciproducens OF09-27	4
+Agathobaculum butyriciproducens OF09-22XD	3
+Solobacterium moorei AF18-46	1
+Tyzzerella nexilis AM23-10LB	1
+Siccibacter turicensis 6100069499-17	6
+Dielma fastidiosa AF31-27BH	1
+Catenibacterium sp. AM22-15	1
+Absiella sp. AM09-45	1
+Holdemanella biformis AF15-20	1
+Holdemanella biformis AF15-5	1
+Butyricicoccus sp. AF24-19AC	2
+Butyricicoccus sp. TM10-16AC	2
+Butyricicoccus sp. AM32-19	1
+Butyricicoccus sp. AM29-23AC	1
+Butyricicoccus sp. OF10-2	3
+Butyricicoccus sp. AF35-5AC	2
+Butyricicoccus sp. OM04-18BH	1
+Butyricicoccus sp. OF13-6	5
+Robinsoniella peoriensis 6600698	1
+Mitsuokella multacida AM25-21AC	1
+Butyricicoccus sp. AM42-5AC	3
+Butyricicoccus sp. AF15-40	1
+Butyricicoccus sp. AM18-35	1
+Paraclostridium bifermentans MHMC-14	5
+Monoglobus pectinilyticus 14	2
+Butyricicoccus sp. AF22-28AC	3
+Butyricicoccus sp. AF10-3	1
+Wohlfahrtiimonas chitiniclastica F6516	1
+Wohlfahrtiimonas chitiniclastica F6514	1
+Sellimonas intestinalis AF37-1	1
+Sellimonas intestinalis AF37-2AT	1
+Subdoligranulum sp. AM16-9	1
+Subdoligranulum sp. OF01-18	1
+Coprococcus sp. OM06-34AC	2
+Coprococcus catus AF45-17	3
+Peptostreptococcus anaerobius KA00810	2
+Varibaculum massiliense Marseille-P2802	2
+Coprobacillus sp. AF17-11AC	1
+Franconibacter helveticus CS-23	5
+Dorea longicatena AM23-13	1
+Sellimonas intestinalis AM14-42	1
+Sellimonas intestinalis AM38-2BH	1
+Subdoligranulum sp. TF05-17AC	1
+Absiella sp. AM09-50	1
+Absiella sp. AM29-15	1
+Subdoligranulum sp. APC924/74	1
+Coprobacillus sp. OF03-2AA	4
+Coprobacillus sp. AF33-1AC	1
+Eisenbergiella massiliensis AF26-4BH	1
+Eisenbergiella tayi DSM 26961	0
+Anaerotruncus sp. 22A2-44	0
+Dorea formicigenerans AM23-7AC	1
+Dorea formicigenerans OM03-2	1
+Coprococcus sp. AM25-4LB	3
+Evtepia gabavorous KLE1738	8
+Wohlfahrtiimonas chitiniclastica G9145	1
+Wohlfahrtiimonas chitiniclastica F6513	1
+Faecalicoccus pleomorphus TF08-11	1
+Absiella sp. AM22-9	1
+Absiella sp. AM10-20	1
+Tyzzerella nexilis OF02-4LB	1
+Anaerotruncus sp. AF02-27	1
+Anaerotruncus colihominis TF05-12AC	1
+Dorea formicigenerans AM40-15AC	2
+Coprobacillus cateniformis OF01-6	1
+Pseudoflavonifractor sp. AF19-9AC	1
+Coprococcus sp. AF38-1	1
+Butyricicoccus sp. GAM44	7
+Eisenbergiella sp. OF01-20	1
+Dorea sp. AF36-15AT	1
+Dorea formicigenerans AM35-12	6
+Coprococcus comes AM22-12LB	1
+Wohlfahrtiimonas chitiniclastica F6512	1
+Wohlfahrtiimonas chitiniclastica F9188	1
+Sellimonas intestinalis AF14-9AC	1
+Subdoligranulum sp. AM23-21AC	1
+Absiella sp. AM27-20	1
+Absiella sp. AM54-8XD	1
+Coprobacillus sp. AF09-1A	1
+Coprobacillus sp. AM17-34	1
+Dorea sp. AM10-31	1
+Dorea longicatena AM22-22	2
+Wohlfahrtiimonas chitiniclastica F6515	1
+Coprobacillus sp. AF13-25	1
+Coprobacillus sp. AF15-30	1
+Coprococcus sp. AF16-22	1
+Coprococcus comes AF16-31	1
+Aliiarcobacter cryaerophilus D2610	5
+Coprobacillus sp. AF13-15	1
+Coprobacillus sp. AF34-1BH	1
+Coprobacillus sp. AF27-24BH	1
+Coprobacillus cateniformis OM02-5	1
+Coprobacillus sp. AM28-15LB	3
+Coprobacillus sp. AF37-2	1
+Coprobacillus sp. OM08-19	1
+Dorea formicigenerans AM29-11	1
+Dorea sp. AF24-7LB	1
+Dorea formicigenerans AF21-25	3
+Dorea formicigenerans TM09-19AC	1
+Dorea formicigenerans AM42-8	1
+Dorea formicigenerans TM09-16AC	1
+Dorea sp. OM07-5	1
+Dorea formicigenerans TF12-1	1
+Dorea formicigenerans AF36-1BH	1
+Coprococcus catus AM28-39	1
+Coprococcus comes AF18-12LB	1
+Coprococcus sp. TF11-13	1
+Coprococcus sp. AM25-15LB	1
+Coprococcus sp. AM14-16	1
+Coprococcus comes AM23-3	1
+Coprococcus sp. AF19-8AC	1
+Coprococcus sp. AF27-8	2
+Coprococcus sp. AF18-48	2
+Coprococcus comes TM07-19	2
+Eisenbergiella massiliensis TF05-5AC	1
+Coprobacillus sp. AF02-13	1
+Coprobacillus sp. AF16-47	1
+Coprobacillus sp. TF10-10	1
+Coprobacillus sp. AM23-2	1
+Coprobacillus sp. AF36-10BH	1
+Coprobacillus sp. AM32-11LB	1
+Coprobacillus sp. AM23-9LB	1
+Coprobacillus sp. AF17-17AC	1
+Coprobacillus sp. AF21-8LB	1
+Coprobacillus sp. AF24-1LB	2
+Coprobacillus sp. AF19-3	1
+Coprobacillus cateniformis OM02-34	1
+Coprobacillus sp. TM10-10	1
+Dorea formicigenerans AM37-11	1
+Dorea formicigenerans AF42-21	5
+Dorea formicigenerans AM46-16	2
+Dorea formicigenerans TM05-5	1
+Dorea sp. AM13-35	1
+Dorea longicatena OM02-16	3
+Dorea formicigenerans AF31-13BH	2
+Dorea sp. OM02-2LB	4
+Dorea formicigenerans TF11-11	1
+Dorea formicigenerans OM02-12	1
+Coprococcus sp. AM27-12LB	1
+Coprococcus sp. OM06-25	2
+Coprococcus sp. AF16-5	1
+Coprococcus sp. AF21-14LB	3
+Coprococcus eutactus AF22-21	4
+Coprococcus sp. OM04-5BH	1
+Coprobacillus sp. AM42-12AC	1
+Coprobacillus sp. OF02-11LB	1
+Coprobacillus sp. AF31-1BH	1
+Coprobacillus sp. AM37-9BH	1
+Coprobacillus sp. AF18-40	1
+Coprobacillus sp. AF18-15LB	1
+Coprobacillus sp. AF13-4LB	2
+Coprobacillus sp. AF35-8	1
+Coprobacillus sp. AF29-3BH	1
+Coprobacillus sp. AM09-26	1
+Dorea formicigenerans AF19-4AC	1
+Dorea formicigenerans AF19-13	1
+Dorea formicigenerans TF09-3	1
+Dorea formicigenerans AF12-11	5
+Dorea longicatena AF17-8AC	2
+Dorea longicatena AM25-9	3
+Dorea sp. AM58-8	6
+Dorea formicigenerans AF25-11	3
+Dorea formicigenerans AM37-5	2
+Atopobium parvulum IPP 1246, DSM 20469	1

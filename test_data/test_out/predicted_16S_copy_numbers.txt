@@ -1,0 +1,11 @@
+Capnocytophaga	3.62
+Coprobacillus	1.43
+Corynebacterium	4.14
+Dialister	5.0
+Enterobacter	7.53
+Fusobacterium	6.12
+Lachnoanaerobaculum	5.0
+Ruminiclostridium	6.5
+Ruminococcus	4.2
+Streptococcus	4.98
+Ureaplasma	2.0

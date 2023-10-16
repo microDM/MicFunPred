@@ -39,48 +39,31 @@ MinPath is used to predict KEGG and MetaCyc pathways with more stringency.
 ## Installation:
 
 #### Install from source
-
 ```
+# create conda environment
+conda create -n micfunpred python=3.10
+conda activate micfunpred
+
+# install dependencies
+# blast
+conda install -c bioconda blast
+# glpk-utils
+conda install -c conda-forge glpk
+
+# install MicFunPred
 git clone https://github.com/microDM/MicFunPred.git
-
 cd MicFunPred
-
-sudo python setup.py install
-```
-
-OR
+pip install .
 
 ```
-git clone https://github.com/microDM/MicFunPred.git
-
-cd MicFunPred
-
-sudo python -m pip install .
-```
-
-#### Dependencies:
-
-#### 1. NCBI-BLAST
-```
-sudo apt-get install ncbi-blast+
-```
-
-For windows download from [NCBI website](https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/) and add blastn.exe to system environment variable.
-
-#### 2. GLPK-utils
-```
-sudo apt-get install glpk-utils
-```
-
-For windows download from [Sourceforge](https://sourceforge.net/projects/winglpk/) and add glpsol.exe to system environment variable.
 
 #### Running MicFunPred:
 
 ```
-usage: MicFunPred_run_pipeline.py [-h] [-i PATH] [-r PATH] [-p PERC_IDENT] [-b PATH] [-c GENECOV] [-o PATH] [-t INT] [-v] [--contrib]
-                                  [--plot]
+MicFunPred_run_pipeline.py -h
+usage: MicFunPred_run_pipeline.py [-h] [-i PATH] [-r PATH] [-p PERC_IDENT] [-b PATH] [-d PATH] [-c GENECOV] [-o PATH] [-t INT] [-v] [--contrib]
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
 
 Required:
@@ -94,16 +77,16 @@ Optional:
                         [Optional] Percent identity cut-off to assign genus. (default: 97)
   -b PATH, --blastout PATH
                         Blast output of ASV/OTU sequences with any database in output format 6
+  -d PATH, --blast_db PATH
+                        Path to custom blast db to run blast with
   -c GENECOV, --genecov GENECOV
-                        [Optional] Percentage of organism in a genus which should have gene to define it as core. Value ranges from 0 to 1
-                        (default: 0.5)
+                        [Optional] Percentage of organism in a genus which should have gene to define it as core. Value ranges from 0 to 1 (default: 0.5)
   -o PATH, --output PATH
                         [Optional] Output directory (default: MicFunPred_out)
   -t INT, --threads INT
                         (Optional) number of threads to be used. (default: 1)
   -v, --verbose         Print message of each step to stdout.
   --contrib             Calculate taxon contribution of functions
-  --plot                Plot contribution for KEGG pathways
 ```
 ### Example:
 

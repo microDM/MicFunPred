@@ -1,0 +1,9 @@
+Metadata-Version: 2.1
+Name: MicFunPred
+Version: 1.0.0
+Summary: MicFunPred prediction
+Home-page: https://github.com/microDM/MicFunPred
+Maintainer: Dattatray Mongad
+License-File: LICENSE.txt
+
+MicFunPred prediction tool

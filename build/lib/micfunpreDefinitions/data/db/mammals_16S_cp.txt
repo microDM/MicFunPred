@@ -1,0 +1,241 @@
+	copy_number
+Actinopolymorpha alba DSM 45243	2
+Allobaculum stercoricanis DSM 13633	7
+Allofustis seminis DSM 15817	5
+Saccharibacter floricola DSM 15669	3
+Alloscardovia criceti DSM 17774	4
+Catellicoccus marimammalium M35/04/3	1
+Succinimonas amylolytica DSM 2873	5
+Pleomorphomonas oryzae DSM 16300	4
+Enterorhabdus mucosicola DSM 19490	5
+Atopococcus tabaci DSM 17538	6
+Azovibrio restrictus DSM 23866	1
+Anaerobiospirillum succiniciproducens DSM 6400	6
+Actinokineospora inagensis DSM 44258	4
+Phaseolibacter flectens ATCC 12775	1
+Pseudochrobactrum sp. AO18b	1
+Franconibacter pulveris DSM 19144	6
+Brackiella oedipodis DSM 13743	1
+Anaerovibrio lipolyticus LB2005	5
+Lachnobacterium bovis AE2004	15
+Agathobaculum desmolans ATCC 43058	2
+Oribacterium sp. FC2011	7
+Mitsuokella jalaludinii DSM 13811	4
+Anaerotruncus sp. G3(2012)	4
+Schwartzia succinivorans DSM 10502	7
+Sphingomonas-like bacterium B12	2
+Anaerosphaera aminiphila DSM 21120	4
+Anaerovibrio lipolyticus DSM 3074	3
+Corynebacterium-like bacterium B27	1
+Allisonella histaminiformans DSM 15230	4
+Ruminobacter amylophilus DSM 1361	6
+Actinokineospora diospyrosa DSM 44255	4
+Sharpea azabuensis KH1P5	4
+Sharpea azabuensis KH2P10	3
+Oxobacter pfennigii V5.2	2
+Sharpea azabuensis DSM 20406	4
+Micrococcineae bacterium KH10	3
+Synergistes jonesii 78-1	5
+Trichococcus flocculiformis DSM 2094	6
+Alkalibacterium pelagium DSM 19183	5
+Dendrosporobacter quercicolus DSM 1736	6
+Succiniclasticum ruminis DSM11005	4
+Jiangella alba DSM 45237	2
+Knoellia flava TL1	1
+Williamsia herbipolensis ARP1	3
+Anaerovibrio lipolyticus 5S	3
+Genome Sequence of Pseudomonas fluorescens UM270	0
+Acetitomaculum ruminis DSM 5522	5
+Succiniclasticum ruminis DSM 9236	5
+Asanoa hainanensis CGMCC 4.5593	3
+Cnuella takakiae DSM 26897	1
+Mollicutes-related endobacteria (MRE) phylotype 2	1
+unclassified Rikenellaceae RC9_F02_bin 11	2
+unclassified Rikenellaceae RC9_F02_bin 10	3
+unclassified Prevotellaceae bin 39	0
+unclassified Prevotellaceae bin 38	1
+unclassified Prevotellaceae bin 36	1
+unclassified Bacteroidales bin 6	1
+unclassified Paludibacteraceae bin 19	0
+unclassified Bacteroidales bin 18	0
+unclassified Marinilabiliaceae bin 17	0
+unclassified Lachnospiraceae bin 19	1
+unclassified Clostridiales bin 6	1
+unclassified Clostridiales bin 5	1
+unclassified Catabacteriaceae bin 3	0
+unclassified Clostridiales bin 4	0
+unclassified Bacteroidales BS11_Hemi bin 3	1
+unclassified Bacteroidales BS11_Hemi_bin 3	0
+unclassified Bacteroidales BS11_Hemi bin 12	0
+unclassified Bacteroidales BS11_Alcium_bin 20	4
+unclassified Bacteroidales BS11_Alcium_bin 2	6
+unclassified Bacteroidales BS11_Alcium_bin 14	1
+unclassified Bacteroidales bin 7	0
+unclassified Rikenellaceae RC9_bin 9	1
+unclassified Rikenellaceae RC9_bin 4	2
+unclassified Rikenellaceae RC9_bin 3	3
+unclassified Rikenellaceae RC9_bin 15	0
+unclassified Prevotellaceae bin 25	0
+unclassified Prevotellaceae bin 24	0
+unclassified Prevotellaceae bin 30	0
+unclassified Bacteroidales bin 22	0
+unclassified Mollicutes RF9_bin 1	1
+unclassified Mollicutes RF9_bin 2	0
+unclassified Mollicutes RF9_bin 3	1
+unclassified Mollicutes RF9_bin 4	1
+unclassified Gammaproteobacteria bin 1	0
+unclassified Deltaproteobacteria bin 1	0
+unclassified Lentisphaera bin 2	4
+unclassified Lentisphaera bin 1	0
+unclassified Selenomonadales bin 1	0
+unclassified Candidatus Saccharibacteria bin 4	0
+unclassified Candidatus Saccharibacteria bin 3	0
+unclassified Candidatus Saccharibacteria bin 2	2
+unclassified Candidatus Saccharibacteria bin 1	2
+unclassified Bacteroidales bin 8	1
+unclassified Muribaculaceae bin 21	2
+unclassified Paludibacteraceae bin 20	0
+unclassified Lachnospiraceae bin 21	1
+unclassified clostridiales Family XIII Incertae sedis bin 14	0
+unclassified Lachnospiraceae bin 17	0
+unclassified Lachnospiraceae bin 27	1
+unclassified Lachnospiraceae bin 15	0
+unclassified Lachnospiraceae bin 16	0
+unclassified Lachnospiraceae bin 20	0
+Ruminoclostridium sp. bin 10	0
+unclassified Ruminococcaceae bin 11	2
+unclassified Ruminococcaceae bin 13	0
+unclassified Ruminococcaceae bin 7	0
+unclassified Ruminococcaceae bin 8	0
+unclassified Clostridiales bin 9	2
+Agreia pratensis VKM Ac-2510	1
+Allonocardiopsis opalescens DSM 45601	1
+Actinophytocola oryzae DSM 45499	3
+Pseudoscardovia suis DSM 24744	1
+Motilibacter peucedani DSM 45328	2
+Labedella gwakjiensis DSM 21548	1
+Actinokineospora cianjurensis DSM 45657	1
+Glomeribacter phylotype 2	2
+Glomeribacter sp. phylotype 3	2
+Promicromonospora sp. AC04	1
+Pelomonas sp. BT06	1
+Promicromonospora sp. CF082	1
+Pleomorphomonas sp. CF100	1
+unclassified Rikenellaceae bin 13	4
+Promicromonospora sp. YR516	1
+Microbispora sp. NRRL B-24597	1
+blood disease bacterium A2-HR MARDI	3
+Falsochrobactrum ovis DSM 26720	1
+Murimonas intestini DSM 26524	1
+Turicimonas muris YL45	6
+Acutalibacter muris KB18	2
+Promicromonospora thailandica SAI-039	3
+Promicromonospora sukumoe SAI-064	3
+Microvirgula sp. AG722	1
+Grimontella sp. AG753	2
+Mangrovibacter plantisponsor DSM 19579	1
+Muricomes intestini DSM 29489	2
+Oharaeibacter diazotrophicus DSM 102969	2
+Dubosiella newyorkensis NYU-BL-A4	1
+Pseudoscardovia radai DSM 24742	4
+Ileibacterium valens NYU-BL-A3	17
+Mesocricetibacter intestinalis DSM 28403	3
+Samsonia erythrinae DSM 16730	3
+Longicatena caecimuris DSM 29481	4
+Actinophytocola xanthii 11-183	1
+Aliiarcobacter porcinus 213	1
+Aliiarcobacter porcinus 117434	1
+Aliiarcobacter porcinus 216	1
+Frisingicoccus caecimuris DSM 28559	3
+Uruburuella suis DSM 17474	1
+Nicoletella semolina DSM 16380	2
+Actinorugispora endophytica DSM 46770	1
+Tamaricihabitans halophyticus DSM 45765	1
+Baia soyae DSM 46831	5
+Cricetibacter osteomyelitidis DSM 28404	3
+Camelimonas lactis DSM 22958	1
+Unclassified bacterium RUG621	0
+Unclassified bacterium RUG493	0
+Unclassified bacterium RUG807	0
+Unclassified bacterium hRUG910	1
+Unclassified bacterium RUG770	1
+Unclassified bacterium hRUG889	1
+Unclassified bacterium hRUG912	1
+Unclassified bacterium RUG841	0
+Unclassified bacterium hRUG901	0
+Unclassified bacterium RUG334	3
+Unclassified bacterium RUG728	0
+Lentisphaerae bacterium RUG673	0
+Lentisphaerae bacterium RUG572	0
+Lentisphaerae bacterium RUG632	2
+Lentisphaerae bacterium RUG555	0
+Lentisphaerae bacterium RUG663	0
+Lentisphaerae bacterium RUG712	1
+Unclutured actinobacterium RUG013	0
+Unclutured actinobacterium RUG440	1
+Unclutured actinobacterium RUG039	0
+Unclutured actinobacterium RUG802	0
+Unclutured actinobacterium RUG721	1
+Unclutured actinobacterium RUG844	0
+Unclutured actinobacterium RUG033	0
+Unclutured actinobacterium hRUG864	0
+Unclutured actinobacterium RUG025	0
+Unclutured actinobacterium hRUG890	1
+Unclutured actinobacterium RUG078	0
+Unclutured actinobacterium RUG002	0
+Unclutured actinobacterium hRUG891	0
+Unclutured actinobacterium RUG040	0
+Unclassified gamma proteobacterium hRUG862	1
+planctomycete bacterium RUG369	1
+planctomycete bacterium RUG695	0
+planctomycete bacterium RUG284	0
+Sharpea sp. RUG123	0
+Sharpea sp. RUG017	0
+Sharpea sp. RUG016	0
+Sharpea sp. RUG262	0
+Sharpea sp. RUG261	0
+Sharpea sp. RUG286	0
+Succinatimonas sp. RUG260	0
+Succinatimonas sp. RUG190	0
+Succinatimonas sp. RUG171	1
+Celerinatantimonas diazotrophica DSM 18577	2
+Cuneatibacter caecimuris DSM 29486	1
+Pseudoscardovia suis DSM 24744	4
+Unclassified proteobacterium RUG574	0
+Unclassified proteobacterium RUG520	0
+Unclassified proteobacterium RUG774	1
+Unclassified proteobacterium RUG399	0
+Unclassified proteobacterium RUG585	1
+Unclassified proteobacterium RUG797	0
+Unclassified proteobacterium RUG791	0
+Unclassified proteobacterium RUG636	1
+Unclassified proteobacterium RUG686	0
+Unclassified proteobacterium RUG731	0
+Unclassified proteobacterium RUG347	0
+Unclassified proteobacterium RUG065	1
+Unclassified proteobacterium RUG653	1
+Corticibacter populi DSM 105136	1
+Lonepinella koalarum DSM 10053	2
+Xylanibacterium ulmi DSM 16932	3
+Promicromonospora sp. SLBN-65	3
+Terrabacter sp. SLBN-196	3
+Actinoallomurus bryophytorum DSM 102200	3
+Rudaeicoccus suwonensis DSM 19560	2
+Humibacillus xanthopallidus SLBN-155	2
+Terrabacter sp. 3211	1
+Terrabacter sp. 3264	2
+Terrabacter lapilli 3265	3
+Friedmanniella endophytica DSM 100723	0
+Flexivirga oryzae DSM 105369	0
+Inquilinus ginsengisoli 584	0
+Kandleria vitulina RUG287	0
+Allostreptomyces psammosilenae DSM 42178	7
+Aeriscardovia aeriphila DSM 22365	0
+Aurantimonas endophytica DSM 103570	1
+Ammoniphilus oxalaticus RAOx-1	0
+Mesonia hippocampi DSM 29568	2
+Peptostreptococcus russellii RT-10B	8
+Pararhizobium giardinii SEMIA 4084	1
+Notoacmeibacter sp. M2BS9Y-3-1	2
+Actinomycetospora corticicola DSM 45772	3
+Pseudoclavibacter sp. JAI123	1

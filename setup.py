@@ -20,7 +20,7 @@ setup(name='MicFunPred',
       url='https://github.com/microDM/MicFunPred',
       packages=['micfunpreDefinitions'],
       scripts=glob('scripts/*py'),
-      install_requires=['biopython==1.76', 'numpy','pandas','plotly==4.9.0','pyarrow'],
+      install_requires=['biopython==1.76', 'numpy','pandas==1.3.5','plotly==4.9.0','pyarrow'],
       package_data={'micfunpreDefinitions':
                     files},
       #data_files=files,

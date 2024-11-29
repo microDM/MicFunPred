@@ -1,6 +1,5 @@
-[<p align="center"><img src="logo.jpeg" width=500 height=130></p>](http://micfunpred.microdm.net.in/)
+[<p align="center"><img src="logo.jpeg" width=500 height=130></p>](https://www.sciencedirect.com/science/article/pii/S0888754321003293)
 
-### Webserver: [micfunpred.microdm.net.in](http://micfunpred.microdm.net.in/)
 
 ### Reference paper: 
 [MicFunPred: A conserved approach to predict functional profiles from 16S rRNA gene sequence data](https://www.sciencedirect.com/science/article/pii/S0888754321003293)
